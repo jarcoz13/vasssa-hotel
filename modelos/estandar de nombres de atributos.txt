@@ -7,4 +7,6 @@ q --> valor entero
 n --> cadenas de texto
 i --> estado/numero determinado de valores en un rango
 t --> tasa/porcentaje
-o --> otros
+o --> otros	
+_____
+ck -> check de datos
