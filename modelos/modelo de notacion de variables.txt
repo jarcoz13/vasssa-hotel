@@ -1,0 +1,11 @@
+Estandar -> prefijo
+f -> fecha
+v -> valor con decimales
+k -> Llave (id)
+q -> Valor Entero
+n -> Cadenas de Texto
+i -> Estado/determinado de valores
+t -> tasa/Porcentage
+o -> otros
+
+ck ->  check
