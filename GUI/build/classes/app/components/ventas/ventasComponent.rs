@@ -1,0 +1,1 @@
+components.ventas.ventasComponent

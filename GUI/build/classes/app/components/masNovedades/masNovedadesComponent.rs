@@ -1,0 +1,1 @@
+components.masNovedades.masNovedadesComponent

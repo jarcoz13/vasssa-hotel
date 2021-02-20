@@ -1,0 +1,1 @@
+components.comunidad.comunidadTemplate
