@@ -3,6 +3,7 @@
 
 ### Miembros
 - Sebastian David Gonzalez - 20182020070
+- Violeth Valmont Azahar - 20181020010
 
 ### Descripción
 Aplicación que permita realizar, conocer y administrar las reservas de un hotel. 
