@@ -2,9 +2,9 @@
 ## Proyecto final de Fundamentos de Bases de Datos
 
 ### Miembros
-- Sebastian David Gonzalez - 20182020070
-- Violeth Valmont Azahar - 20181020010
-- Alejandro mk Cortazar - 196700000010
+- Sebastian David Gonzalez      - 20182020070
+- Violeth Valmont Azahar        - 20181020010
+- Jose Alejandro Cortazar Lopez - 20181020022
 
 ### Descripción
 Aplicación que permita realizar, conocer y administrar las reservas de un hotel. 
