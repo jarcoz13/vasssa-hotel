@@ -2,11 +2,7 @@
 ## Proyecto final de Fundamentos de Bases de Datos
 
 ### Miembros
-- Nelson Santiago Roa Garzón
-- Jose Alejandro Cortazar Lopez	
-- Violeth Valmont Azahar
-- Sebastian David Gonzalez
-- Steffany Rojas Comas
+- Sebastian David Gonzalez - 20182020070
 
 ### Descripción
 Aplicación que permita realizar, conocer y administrar las reservas de un hotel. 
@@ -17,5 +13,5 @@ y a su vez dar un descuento especial por la cantidad de días que se encuentren 
 ### Descargo de responsabilidad
 Aplicación realizada con propósitos meramente académicos, 
 la Universidad Distrital Francisco José de Caldas no es propietaria
-ni responsable por el contenido utilizado en esta aplicación web.
+ni responsable por el contenido utilizado en esta aplicación.
 
