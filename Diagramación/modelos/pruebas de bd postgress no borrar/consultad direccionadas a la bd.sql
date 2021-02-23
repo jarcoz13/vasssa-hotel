@@ -1,0 +1,9 @@
+DECLARE @FechaInicial AS DATE ='01/06/2016'
+DECLARE @FechaFin AS DATE ='30/04/2016'
+
+SELECT * FROM A
+WHERE A.FECHACONSULTA
+BETWEEN @FechaInicial AND @FechaFin
+
+
+DECLARE @Usuario as varchar
