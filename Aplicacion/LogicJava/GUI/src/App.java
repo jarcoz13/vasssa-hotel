@@ -1,7 +1,8 @@
 // import vistaPrincipal.vistaPrincipalTemplate;
 import cliente.Login.LoginComponent;
+import javax.swing.SwingUtilities;
 
-import javax.swing.*;
+
 
 public class App {
     public static void main(String[] args) {
