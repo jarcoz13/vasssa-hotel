@@ -5,16 +5,23 @@
  */
 package principal;
 
-import gui.ControlGui;
+import gui.LoginComponent;
+import javax.swing.SwingUtilities;
 
 /**
  *
  * @author sebas
  */
 public class Principal {
-    public static void main(String[] args){
-        ControlGui cg = new ControlGui();
-        cg.setVisible(true);
+
+    public static void main(String[] args) {
+        Runnable runAplication = new Runnable() {
+            @Override
+            public void run() {
+                LoginComponent login = new LoginComponent(); // declaracion de la clase
+            }
+        };
+        SwingUtilities.invokeLater(runAplication);
     }
-    
+
 }
