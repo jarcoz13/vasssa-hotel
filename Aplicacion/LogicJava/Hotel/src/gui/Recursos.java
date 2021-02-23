@@ -81,10 +81,10 @@ public class Recursos {
     public Border getBordeDefaul() { return bordeDefaul;}
 
     public void crearImagen() {
-        iLogo = new ImageIcon("resource/hotel.png");
-        iCerrar = new ImageIcon("resource/cerrar.png");
-        iVentana = new ImageIcon("resource/ventana.png");
-        iMinimizar = new ImageIcon("resource/minimizar.png");
+        iLogo = new ImageIcon(getClass().getResource("/resource/hotel.png"));
+        iCerrar = new ImageIcon(getClass().getResource("/resource/cerrar.png"));
+        iVentana = new ImageIcon(getClass().getResource("/resource/ventana.png"));
+        iMinimizar = new ImageIcon(getClass().getResource("/resource/minimizar.png"));
     }
     public ImageIcon getiLogo() { return iLogo;}
     public ImageIcon getiCerrar() { return iCerrar;}

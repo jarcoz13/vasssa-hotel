@@ -10,7 +10,7 @@ import javax.swing.SwingUtilities;
 
 /**
  *
- * @author sebas
+ * @author sebas & Alejo & Vi
  */
 public class Principal {
 
