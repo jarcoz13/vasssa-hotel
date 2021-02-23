@@ -28,12 +28,12 @@ public class FormularioReserva extends javax.swing.JPanel {
         return botonLimpiar;
     }
 
-    public JComboBox<String> getCantidadHabitaciones() {
-        return cantidadHabitaciones;
+    public JComboBox<String> getComboHabitaciones() {
+        return comboHabitaciones;
     }
 
-    public JComboBox<String> getCantidadPersonas() {
-        return cantidadPersonas;
+    public JComboBox<String> getComboPersonas() {
+        return comboPersonas;
     }
 
     public JDatePicker getFechaFinal() {
@@ -56,11 +56,11 @@ public class FormularioReserva extends javax.swing.JPanel {
         return numPersonasReservadas;
     }
 
-    public JComboBox<String> getTipoHabitacion() {
-        return tipoHabitacion;
+    public JComboBox<String> getComboTipoHab() {
+        return comboTipo;
     }
     
-    public JComboBox<String> getTipoId(){
+    public JComboBox<String> getComboTipoId(){
         return tipoId;
     }
 
@@ -85,16 +85,16 @@ public class FormularioReserva extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        cantidadHabitaciones = new javax.swing.JComboBox<>();
+        comboHabitaciones = new javax.swing.JComboBox<>();
         jLabel3 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         fechaFinal = new org.jdatepicker.JDatePicker();
         fechaInicial = new org.jdatepicker.JDatePicker();
         jLabel4 = new javax.swing.JLabel();
-        cantidadPersonas = new javax.swing.JComboBox<>();
+        comboPersonas = new javax.swing.JComboBox<>();
         jLabel5 = new javax.swing.JLabel();
-        tipoHabitacion = new javax.swing.JComboBox<>();
+        comboTipo = new javax.swing.JComboBox<>();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         botonAgregar = new javax.swing.JButton();
@@ -119,7 +119,7 @@ public class FormularioReserva extends javax.swing.JPanel {
 
         setMaximumSize(new java.awt.Dimension(307, 580));
 
-        cantidadHabitaciones.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2", "3", "4", "5", "6" }));
+        comboHabitaciones.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2", "3", "4", "5", "6" }));
 
         jLabel3.setText("Hasta");
 
@@ -130,11 +130,11 @@ public class FormularioReserva extends javax.swing.JPanel {
 
         jLabel4.setText("Reservar");
 
-        cantidadPersonas.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2", "3", "4" }));
+        comboPersonas.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2", "3", "4" }));
 
         jLabel5.setText("habitaciones");
 
-        tipoHabitacion.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Sencilla", "Doble" }));
+        comboTipo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Sencilla", "Doble" }));
 
         jLabel6.setText("Para");
 
@@ -214,16 +214,16 @@ public class FormularioReserva extends javax.swing.JPanel {
                         .addGap(10, 10, 10)
                         .addComponent(jLabel4)
                         .addGap(4, 4, 4)
-                        .addComponent(cantidadHabitaciones, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(comboHabitaciones, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(10, 10, 10)
                         .addComponent(jLabel5)
                         .addGap(10, 10, 10)
-                        .addComponent(tipoHabitacion, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(comboTipo, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(27, 27, 27)
                         .addComponent(jLabel6)
                         .addGap(8, 8, 8)
-                        .addComponent(cantidadPersonas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(comboPersonas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(10, 10, 10)
                         .addComponent(jLabel7))
                     .addGroup(layout.createSequentialGroup()
@@ -291,8 +291,8 @@ public class FormularioReserva extends javax.swing.JPanel {
                     .addComponent(fechaFinal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(24, 24, 24)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(cantidadHabitaciones, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(tipoHabitacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(comboHabitaciones, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(comboTipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(3, 3, 3)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -300,7 +300,7 @@ public class FormularioReserva extends javax.swing.JPanel {
                             .addComponent(jLabel5))))
                 .addGap(11, 11, 11)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(cantidadPersonas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(comboPersonas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(3, 3, 3)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -366,8 +366,9 @@ public class FormularioReserva extends javax.swing.JPanel {
     private javax.swing.JButton botonConfirmarReserva;
     private javax.swing.JButton botonConsultar;
     private javax.swing.JButton botonLimpiar;
-    private javax.swing.JComboBox<String> cantidadHabitaciones;
-    private javax.swing.JComboBox<String> cantidadPersonas;
+    private javax.swing.JComboBox<String> comboHabitaciones;
+    private javax.swing.JComboBox<String> comboPersonas;
+    private javax.swing.JComboBox<String> comboTipo;
     private org.jdatepicker.JDatePicker fechaFinal;
     private org.jdatepicker.JDatePicker fechaInicial;
     private javax.swing.JLabel jLabel1;
@@ -389,7 +390,6 @@ public class FormularioReserva extends javax.swing.JPanel {
     private javax.swing.JLabel numHabSencillasReservadas;
     private javax.swing.JTextField numId;
     private javax.swing.JLabel numPersonasReservadas;
-    private javax.swing.JComboBox<String> tipoHabitacion;
     private javax.swing.JComboBox<String> tipoId;
     private javax.swing.JLabel valorAproximado;
     private javax.swing.JLabel valorDescuentos;

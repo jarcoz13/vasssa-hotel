@@ -6,16 +6,18 @@ import java.awt.event.ActionListener;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public final class Control implements ActionListener {
-
+    
     private final Ventana ventana;
-
+    
     public Control(Ventana ventana) {
         this.ventana = ventana;
         inicializarAcciones();
     }
-
+    
     public void inicializarAcciones() {
         ventana.getBotonInicio().addActionListener(this);
         ventana.getBotonReservas().addActionListener(this);
@@ -31,30 +33,32 @@ public final class Control implements ActionListener {
         ventana.getFormularioReserva().getBotonConfirmarReserva().addActionListener(this);
         ventana.getFormularioReserva().getBotonLimpiar().addActionListener(this);
     }
-
+    
     public boolean queryReserva(Date fechaInicial, Date fechaFinal, int habitaciones, int numPersonas) {
         //IMPLEMENTAR
         return true;
     }
-
+    
     public boolean queryReserva(Date fechaInicial, Date fechaFinal, int habitacionesSencillas, int habitacionesDobles, int numPersonas) {
         //IMPLEMENTAR
         return true;
     }
-
+    
     public boolean confirmarReserva() {
         //IMPLEMENTAR
         return true;
     }
-
+    
     public void llenarFormulario() {
         String fechaI = ventana.getVistaReservas().getFechaInicioRes().getFormattedTextField().getText();
         String fechaF = ventana.getVistaReservas().getFechaFinRes().getFormattedTextField().getText();
         ventana.getFormularioReserva().getFechaInicial().getFormattedTextField().setText(fechaI);
         ventana.getFormularioReserva().getFechaFinal().getFormattedTextField().setText(fechaF);
     }
-
+    
     public void limpiarFormulario() {
+        restablecerCombos();
+        ventana.getFormularioReserva().getComboTipoId().setSelectedIndex(0);
         ventana.getFormularioReserva().getNumPersonasReservadas().setText("0");
         ventana.getFormularioReserva().getNumHabDoblesReservadas().setText("0");
         ventana.getFormularioReserva().getNumHabSencillasReservadas().setText("0");
@@ -63,12 +67,61 @@ public final class Control implements ActionListener {
         ventana.getFormularioReserva().getNumId().setText("");
     }
     
-    public boolean comprobarIntegridad(Date fechaInicial, Date fechaFinal, int habitacionesSencillas, int habitacionesDobles, int numPersonas){
+    public void restablecerCombos() {
+        ventana.getFormularioReserva().getComboHabitaciones().setSelectedIndex(0);
+        ventana.getFormularioReserva().getComboPersonas().setSelectedIndex(0);
+        ventana.getFormularioReserva().getComboTipoHab().setSelectedIndex(0);
+    }
+    
+    public boolean comprobarIntegridad(Date fechaInicial, Date fechaFinal, int habitacionesSencillas, int habitacionesDobles, int numPersonas) {
         return true;
     }
     
-    public boolean comprobarIntegridad(Date fechaInicial, Date fechaFinal, int habitacionesSencillas, int habitacionesDobles, int numPersonas, int numDoc){
+    public boolean comprobarIntegridad(Date fechaInicial, Date fechaFinal, int habitacionesSencillas, int habitacionesDobles, int numPersonas, int numDoc) {
         return true;
+    }
+    
+    public Date convertirStringAFecha(String texto) {
+        Date fecha = null;
+        try {
+            fecha = new SimpleDateFormat("dd/MM/yyyy").parse(texto);
+        } catch (ParseException ex) {
+            System.out.println("Ocurrió un error Inesperado");
+        }
+        return fecha;
+    }
+    
+    public String obtenerTipoHab() {
+        String tipo = (String) ventana.getFormularioReserva().getComboTipoHab().getSelectedItem();
+        return tipo;
+    }
+    
+    public boolean añadirAlaReserva() {
+        System.out.println("Entro 1");
+        String fechaI = ventana.getFormularioReserva().getFechaInicial().getFormattedTextField().getText();
+        String fechaF = ventana.getFormularioReserva().getFechaFinal().getFormattedTextField().getText();
+        Date fechaInicial = convertirStringAFecha(fechaI);
+        Date fechaFinal = convertirStringAFecha(fechaF);
+        int habitacionesSencillas = 0;
+        int habitacionesDobles = 0;
+        int numPersonas = Integer.parseInt((String) ventana.getFormularioReserva().getComboPersonas().getSelectedItem());
+        int numHabitaciones = Integer.parseInt((String) ventana.getFormularioReserva().getComboHabitaciones().getSelectedItem());
+        if ("Sencilla".equals(obtenerTipoHab())) {
+            habitacionesSencillas = numHabitaciones;
+        } else {
+            habitacionesDobles = numHabitaciones;
+        }
+        if (comprobarIntegridad(fechaInicial, fechaFinal, habitacionesSencillas, habitacionesDobles, numPersonas)) {
+            numPersonas = Integer.parseInt(ventana.getFormularioReserva().getNumPersonasReservadas().getText()) + numPersonas;
+            habitacionesSencillas = Integer.parseInt(ventana.getFormularioReserva().getNumHabSencillasReservadas().getText()) + habitacionesSencillas;
+            habitacionesDobles = Integer.parseInt(ventana.getFormularioReserva().getNumHabDoblesReservadas().getText()) + habitacionesDobles;
+            ventana.getFormularioReserva().getNumPersonasReservadas().setText("" + numPersonas);
+            ventana.getFormularioReserva().getNumHabSencillasReservadas().setText("" + habitacionesSencillas);
+            ventana.getFormularioReserva().getNumHabDoblesReservadas().setText("" + habitacionesDobles);
+            return true;
+        } else {
+            return false;
+        }
     }
     
     public boolean consultarReserva(boolean valor) {
@@ -76,36 +129,31 @@ public final class Control implements ActionListener {
         String fechaF = ventana.getVistaReservas().getFechaFinRes().getFormattedTextField().getText();
         String numP = (String) ventana.getVistaReservas().getNumPersonas().getSelectedItem();
         String numH = (String) ventana.getVistaReservas().getNumHabitaciones().getSelectedItem();
-        try {
-            if (valor) {
-                if ("".equals(fechaI) || "".equals(fechaF)) {
-                    return false;
-                } else {
-                    Date fechaInicial = new SimpleDateFormat("dd/MM/yyyy").parse(fechaI);
-                    Date fechaFinal = new SimpleDateFormat("dd/MM/yyyy").parse(fechaF);
-                    int numPersonas = Integer.parseInt(numP);
-                    int numHabitaciones = Integer.parseInt(numH);
-                    return queryReserva(fechaInicial, fechaFinal, numPersonas, numHabitaciones);
-                }
-            } else {
-                int numPersonas = Integer.parseInt(ventana.getFormularioReserva().getNumPersonasReservadas().getText());
-                int habitacionesSencillas = Integer.parseInt(ventana.getFormularioReserva().getNumHabSencillasReservadas().getText());
-                int habitacionesDobles = Integer.parseInt(ventana.getFormularioReserva().getNumHabDoblesReservadas().getText());
-                fechaI = ventana.getFormularioReserva().getFechaInicial().getFormattedTextField().getText();
-                fechaF = ventana.getFormularioReserva().getFechaFinal().getFormattedTextField().getText();
-                Date fechaInicial = new SimpleDateFormat("dd/MM/yyyy").parse(fechaI);
-                Date fechaFinal = new SimpleDateFormat("dd/MM/yyyy").parse(fechaF);
-                if (comprobarIntegridad(fechaInicial, fechaFinal, habitacionesSencillas, habitacionesDobles, numPersonas)) { //Comprobaciones de reservación
-                    return queryReserva(fechaInicial, fechaFinal, habitacionesSencillas, habitacionesDobles, numPersonas);
-                }
+        if (valor) {
+            if ("".equals(fechaI) || "".equals(fechaF)) {
                 return false;
+            } else {
+                Date fechaInicial = convertirStringAFecha(fechaI);
+                Date fechaFinal = convertirStringAFecha(fechaF);
+                int numPersonas = Integer.parseInt(numP);
+                int numHabitaciones = Integer.parseInt(numH);
+                return queryReserva(fechaInicial, fechaFinal, numPersonas, numHabitaciones);
             }
-        } catch (ParseException ex) {
-            System.out.println("Ocurrió un error");
+        } else {
+            int numPersonas = Integer.parseInt(ventana.getFormularioReserva().getNumPersonasReservadas().getText());
+            int habitacionesSencillas = Integer.parseInt(ventana.getFormularioReserva().getNumHabSencillasReservadas().getText());
+            int habitacionesDobles = Integer.parseInt(ventana.getFormularioReserva().getNumHabDoblesReservadas().getText());
+            fechaI = ventana.getFormularioReserva().getFechaInicial().getFormattedTextField().getText();
+            fechaF = ventana.getFormularioReserva().getFechaFinal().getFormattedTextField().getText();
+            Date fechaInicial = convertirStringAFecha(fechaI);
+            Date fechaFinal = convertirStringAFecha(fechaF);
+            if (comprobarIntegridad(fechaInicial, fechaFinal, habitacionesSencillas, habitacionesDobles, numPersonas)) { //Comprobaciones de reservación
+                return queryReserva(fechaInicial, fechaFinal, habitacionesSencillas, habitacionesDobles, numPersonas);
+            }
+            return false;
         }
-        return false;
     }
-
+    
     @Override
     public void actionPerformed(ActionEvent e) {
         Object evento = e.getSource();
@@ -136,10 +184,13 @@ public final class Control implements ActionListener {
             llenarFormulario();
             ventana.mostrarVistaFormularioReserva();
         }
-        if (evento.equals(ventana.getFormularioReserva().getBotonLimpiar())) {
+        if (evento.equals(ventana.getFormularioReserva().getBotonAgregar())) {//Añadir datos a la reserva
+            añadirAlaReserva();
+        }
+        if (evento.equals(ventana.getFormularioReserva().getBotonLimpiar())) {//Limpiar formulario
             limpiarFormulario();
         }
-        if (evento.equals(ventana.getFormularioReserva().getBotonConfirmarReserva())) {
+        if (evento.equals(ventana.getFormularioReserva().getBotonConfirmarReserva())) {//ConfirmarReserva
             if (confirmarReserva()) {
                 limpiarFormulario();
             } else {
@@ -148,16 +199,16 @@ public final class Control implements ActionListener {
         }
         if (evento.equals(ventana.getFormularioReserva().getBotonConsultar())) { //Consultar reserva completa
             if (consultarReserva(false)) {
-
+                
             } else {
-                System.out.println("Lleno mal los datos");
+                ventana.mostrarErrorDatosIngresados();
             }
         }
         if (evento.equals(ventana.getVistaReservas().getBotonConsultar())) { //Consultar reserva parcial
             if (consultarReserva(true)) {
-
+                
             } else {
-                System.out.println("Lleno mal los datos");
+                ventana.mostrarErrorDatosIngresados();
             }
         }
         if (evento.equals(ventana.getVistaMenu().getBotonLogin())) { //Ir a Login

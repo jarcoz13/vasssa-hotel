@@ -42,6 +42,10 @@ public final class Ventana extends javax.swing.JFrame {
     public void mostrarVistaFormularioReserva() {
         JOptionPane.showOptionDialog(null, formularioReserva, "Hacer una Reservación", JOptionPane.PLAIN_MESSAGE, JOptionPane.PLAIN_MESSAGE, null, new Object[]{}, null);
     }
+    
+    public void mostrarErrorDatosIngresados(){
+        JOptionPane.showMessageDialog(null, "Revise que los datos que ingresó sean válidos", "Error", JOptionPane.WARNING_MESSAGE);
+    }
 
     public void mostrarVistaHome() {
         panelPrincipal.add(vistaHome);
