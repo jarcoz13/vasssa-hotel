@@ -1,3 +1,6 @@
 node_modules
 /Aplicacion/LogicJava/Hotel/nbproject/private/
 /Aplicacion/LogicJava/Hotel/build/
+/Api Hotel/nbproject/private/
+/Api Hotel/dist/
+/Api Hotel/build/
