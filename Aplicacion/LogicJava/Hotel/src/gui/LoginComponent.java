@@ -27,7 +27,9 @@ public class LoginComponent implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource().equals(loginTemplate.getbEntrar())) {
+            loginTemplate.dispose();
             entrar();
+            
         }
         if (e.getSource().equals(loginTemplate.getbCerrar())) {
             System.exit(0);
@@ -36,6 +38,7 @@ public class LoginComponent implements ActionListener {
 
     public void entrar() {
         ControlGui cg = new ControlGui();
+        
         cg.setVisible(true);
     }
 }
