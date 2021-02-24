@@ -35,8 +35,15 @@ public final class Control implements ActionListener {
         ventana.getVistaCancelacion().getRadioNombre().addActionListener(this);
         ventana.getVistaCancelacion().getRadioTelyFecha().addActionListener(this);
         ventana.getVistaCancelacion().getBotonBuscar().addActionListener(this);
+        ventana.getVistaLogin().getBotonIngreso().addActionListener(this);
     }
-
+    
+    /* Los métodos QUERY se encargan de hacer la consulta necesaria
+       todos son de tipo BOOLEAN y deben retornar TRUE si lo que se busca
+        consultar existe o FALSE si no
+    */
+    
+    
     public boolean queryReserva(String fechaInicial, String fechaFinal, int habitaciones, int numPersonas) { //Consulta rápida
         boolean disponible = false;
         //disponible=con.ConsultarReserva(fechaInicial, fechaFinal);
@@ -62,6 +69,18 @@ public final class Control implements ActionListener {
         //IMPLEMENTAR
         return true;
     }
+    
+    public boolean queryUsuario(String usuario, String password){ //Consulta de usuario
+        //IMPLEMENTAR
+        return true;
+    }
+    
+    public boolean insertarReserva(int id, String nombre, String apellido, int numDoc, String tipoDoc, String telefono, String direccion, String ciudad, Date fechaNacimiento,
+            Date fechaInicial, Date fechaFinal, int habitacionesSencillas, int habitacionesDobles, int numPersonas) {
+        //IMPLEMENTAR
+        return true;
+    }
+    
 
     public boolean buscarReserva(boolean valor) {
         if (valor) {
@@ -90,12 +109,6 @@ public final class Control implements ActionListener {
     public boolean comprobarIntegridad(Date fechaInicial, Date fechaFinal, int habitacionesSencillas, int habitacionesDobles,
             int numPersonas, int numDoc) {
 
-        return true;
-    }
-
-    public boolean insertarReserva(int id, String nombre, String apellido, int numDoc, String tipoDoc, String telefono, String direccion, String ciudad, Date fechaNacimiento,
-            Date fechaInicial, Date fechaFinal, int habitacionesSencillas, int habitacionesDobles, int numPersonas) {
-        //IMPLEMENTAR
         return true;
     }
 
@@ -283,6 +296,22 @@ public final class Control implements ActionListener {
             buscarReserva(false);
         }
     }
+    
+    public boolean queryUsuario(String usuario, String password){
+        //IMPLEMENTAR
+        return true;
+    }
+    
+    public void iniciarSesion(){
+        String user = ventana.getVistaLogin().getCampoUsuario().getText();
+        char[] pass = ventana.getVistaLogin().getCampoContraseña().getPassword();
+        String password = new String(pass);
+        if(queryUsuario(user, password)){
+            
+        }else{
+            ventana.mostrarErrorDatosIngresados();
+        }
+    }
 
     @Override
     public void actionPerformed(ActionEvent e) {
@@ -350,7 +379,7 @@ public final class Control implements ActionListener {
             ventana.mostrarVistaCancelacion();
         }
         if (evento.equals(ventana.getVistaMenu().getBotonLogin())) { //Ir a Login
-
+            ventana.mostrarVistaLogin();
         }
         if (evento.equals(ventana.getVistaCancelacion().getBotonBuscar())) {
             consultarCancelacion();
@@ -363,6 +392,9 @@ public final class Control implements ActionListener {
         }
         if (evento.equals(ventana.getVistaMenu().getBotonSalir())) { //Cerrar programa
             System.exit(0);
+        }
+        if(evento.equals(ventana.getVistaLogin().getBotonIngreso())){
+            iniciarSesion();
         }
     }
 }

@@ -13,6 +13,7 @@ public final class Ventana extends javax.swing.JFrame {
     private VistaFormulario vistaFormulario;
     private VistaRecibo vistaRecibo;
     private VistaCancelacion vistaCancelacion;
+    private VistaInicioSesion vistaLogin;
 
     public Ventana() { //Constructor
         initComponents();
@@ -34,6 +35,7 @@ public final class Ventana extends javax.swing.JFrame {
         vistaFormulario = new VistaFormulario();
         vistaRecibo = new VistaRecibo();
         vistaCancelacion = new VistaCancelacion();
+        vistaLogin = new VistaInicioSesion();
     }
 
     public void mostrarVistaFormularioReserva() {
@@ -43,22 +45,22 @@ public final class Ventana extends javax.swing.JFrame {
     public void ocultarVistaFormulario() {
         vistaFormulario.dispose();
     }
-    
-    public void mostrarVistaCancelacion(){
+
+    public void mostrarVistaCancelacion() {
         vistaCancelacion.setVisible(true);
     }
-    
-    public void ocultarVistaCancelacion(){
+
+    public void ocultarVistaCancelacion() {
         vistaCancelacion.dispose();
     }
 
-    public void mostrarVistaRecibo () {
+    public void mostrarVistaRecibo() {
         JOptionPane.showMessageDialog(null, vistaRecibo, "Reserva Realizada", JOptionPane.PLAIN_MESSAGE);
         vistaRecibo = null;
     }
 
     public void mostrarErrorDatosIngresados() {
-        JOptionPane.showMessageDialog(null, "Revise que los datos que ingresó sean válidos", "Error", JOptionPane.WARNING_MESSAGE);
+        JOptionPane.showMessageDialog(null, "Compruebe que los datos que ingresó sean válidos", "Error", JOptionPane.WARNING_MESSAGE);
     }
 
     public void mostrarErrorFatal() {
@@ -87,6 +89,15 @@ public final class Ventana extends javax.swing.JFrame {
         vistaContacto.setVisible(true);
     }
 
+    public void mostrarVistaLogin() {
+        vistaLogin.setVisible(true);
+    }
+
+    public void ocultarVistaLogin() {
+        vistaLogin.setVisible(false);
+        vistaLogin.dispose();
+    }
+
     public void mostrarVistaMenu() {
         panelMenu.add(vistaMenu);
         vistaMenu.setVisible(true);
@@ -109,12 +120,16 @@ public final class Ventana extends javax.swing.JFrame {
     public VistaHome getVistaHome() {
         return vistaHome;
     }
-    
-    public VistaRecibo getVistaRecibo(){
+
+    public VistaRecibo getVistaRecibo() {
         return vistaRecibo;
     }
-    
-    public VistaCancelacion getVistaCancelacion(){
+
+    public VistaInicioSesion getVistaLogin() {
+        return vistaLogin;
+    }
+
+    public VistaCancelacion getVistaCancelacion() {
         return vistaCancelacion;
     }
 
