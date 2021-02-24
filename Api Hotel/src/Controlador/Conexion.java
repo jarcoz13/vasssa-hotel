@@ -324,7 +324,7 @@ public class Conexion {
     }
 
     //METODO RESERVAR HABITACIONES DISPONIBLES
-    public void InsertarRegistro(int idReserva, int idHabitacion) {
+    public void habDisp(int idReserva, int idHabitacion) {
         Statement s = null;
         try {
             s = connection.createStatement();

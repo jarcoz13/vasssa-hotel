@@ -82,9 +82,10 @@ public final class Control implements ActionListener {
         return true;
     }
 
-    public boolean insertarReserva(int id, String nombre, String apellido, int numDoc, String tipoDoc, String telefono, String direccion, String ciudad, Date fechaNacimiento,
-            Date fechaInicial, Date fechaFinal, int habitacionesSencillas, int habitacionesDobles, int numPersonas) {
-        //IMPLEMENTAR
+    public boolean insertarReserva(int id, String nombre, String apellido, int numDoc, String tipoDoc, String telefono, String direccion, String ciudad, String fechaNacimiento,
+            String fechaInicial, String fechaFinal, int habitacionesSencillas, int habitacionesDobles, int numPersonas) {
+        int tipo=1;
+        con.InsertarReserva(id, 1, fechaInicial, fechaFinal, 2, tipo, numDoc, apellido, nombre, direccion, ciudad, telefono, fechaNacimiento, 24);
         return true;
     }
 
