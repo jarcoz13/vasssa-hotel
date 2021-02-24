@@ -54,13 +54,14 @@ public final class Control implements ActionListener {
      */
     public boolean queryReserva(String fechaInicial, String fechaFinal, int habitaciones, int numPersonas) { //Consulta rápida
         boolean disponible = false;
-        //disponible=con.ConsultarReserva(fechaInicial, fechaFinal);
+        disponible=con.ConsultarReserva(fechaInicial, fechaFinal);
         return disponible;
     }
 
     public boolean queryReserva(String fechaInicial, String fechaFinal, int habitacionesSencillas, int habitacionesDobles, int numPersonas) { //Consulta completa
-        //IMPLEMENTAR
-        return true;
+        boolean disponible = false;
+        disponible=con.ConsultarReservaComp(fechaInicial, fechaFinal, habitacionesSencillas, habitacionesDobles, numPersonas);
+        return disponible;
     }
 
     public boolean queryReserva(int llave) { //Consulta por llave primaria
@@ -69,8 +70,9 @@ public final class Control implements ActionListener {
     }
 
     public boolean queryReserva(String nombre) { //Consulta por nombre
-        //IMPLEMENTAR
-        return true;
+        boolean existe = true;
+        con.printConsultaReserva(nombre);
+        return existe;
     }
 
     public boolean queryReserva(String telefono, String fechaInicial) { //Consulta por telefono y fechaInicial

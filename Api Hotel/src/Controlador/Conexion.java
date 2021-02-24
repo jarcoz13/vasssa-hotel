@@ -1,6 +1,7 @@
 package Controlador;
 
 import java.sql.*;
+import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
@@ -193,11 +194,13 @@ public class Conexion {
                 datos[3] = rs.getString(4);
                 System.out.println(datos[3]);
                 datos[4] = rs.getString(5);
-                System.out.println(datos[3]);
+                System.out.println(datos[4]);
                 datos[5] = rs.getString(6);
-                System.out.println(datos[3]);
+                System.out.println(datos[5]);
                 datos[6] = rs.getString(7);
-                System.out.println(datos[3]);
+                System.out.println(datos[6]);
+                
+                JOptionPane.showMessageDialog(null,datos[0]+"||"+datos[1]+"||"+datos[2]+"||"+datos[3]+"||"+datos[4]+"||"+datos[5]+"||"+datos[6]);
             }
         } catch (Exception e) {
             System.out.println("Error en tabla");
