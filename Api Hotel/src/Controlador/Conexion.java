@@ -152,20 +152,20 @@ public class Conexion {
 
         try {
             s = connection.createStatement();
-            s.executeUpdate("update reserva set i_estado="+estado+" from reserva r INNER JOIN persona p ON p.k_id_persona_tipo=r.k_id_persona_tipo where p.n_nombre = '"+nombre+"'");
+            s.executeUpdate("update reserva set i_estado=" + estado + " from reserva r INNER JOIN persona p ON p.k_id_persona_tipo=r.k_id_persona_tipo where p.n_nombre = '" + nombre + "'");
         } catch (Exception e) {
 
             System.out.println("Problema en Reserva");
         }
     }
-    
+
     //MODIFICAR ESTADO DE UNA RESERVA POR NUMERO Y FECHA
     public void modResNumFecha(String numero, String fecha, int estado) {
         Statement s = null;
 
         try {
             s = connection.createStatement();
-            s.executeUpdate("update reserva set i_estado="+estado+" from reserva r JOIN huesped h ON h.k_id_persona_tipo=r.k_id_persona_tipo where r.f_inicio= '"+fecha+"' AND h.q_telefono = '"+numero+"'");
+            s.executeUpdate("update reserva set i_estado=" + estado + " from reserva r JOIN huesped h ON h.k_id_persona_tipo=r.k_id_persona_tipo where r.f_inicio= '" + fecha + "' AND h.q_telefono = '" + numero + "'");
         } catch (Exception e) {
 
             System.out.println("Problema en Reserva");
@@ -181,7 +181,7 @@ public class Conexion {
         try {
 
             s = connection.createStatement();
-            rs = s.executeQuery("SELECT r.* FROM reserva r LEFT JOIN persona p ON p.k_id_persona_tipo=r.k_id_persona_tipo where p.n_nombre = '"+nombre+"'");
+            rs = s.executeQuery("SELECT r.* FROM reserva r LEFT JOIN persona p ON p.k_id_persona_tipo=r.k_id_persona_tipo where p.n_nombre = '" + nombre + "'");
 
             while (rs.next()) {
                 datos[0] = rs.getString(1);
@@ -203,6 +203,7 @@ public class Conexion {
             System.out.println("Error en tabla");
         }
     }
+
     //METODO MOSTRAR HABITACIONES
     public void printHabitaciones(JTable tabla) {
         ResultSet rs = null;

@@ -12,6 +12,7 @@ public final class Ventana extends javax.swing.JFrame {
     private VistaContacto vistaContacto;
     private VistaFormulario vistaFormulario;
     private VistaRecibo vistaRecibo;
+    private VistaCancelacion vistaCancelacion;
 
     public Ventana() { //Constructor
         initComponents();
@@ -32,6 +33,7 @@ public final class Ventana extends javax.swing.JFrame {
         vistaContacto = new VistaContacto();
         vistaFormulario = new VistaFormulario();
         vistaRecibo = new VistaRecibo();
+        vistaCancelacion = new VistaCancelacion();
     }
 
     public void mostrarVistaFormularioReserva() {
@@ -40,6 +42,14 @@ public final class Ventana extends javax.swing.JFrame {
 
     public void ocultarVistaFormulario() {
         vistaFormulario.dispose();
+    }
+    
+    public void mostrarVistaCancelacion(){
+        vistaCancelacion.setVisible(true);
+    }
+    
+    public void ocultarVistaCancelacion(){
+        vistaCancelacion.dispose();
     }
 
     public void mostrarVistaRecibo () {
@@ -93,6 +103,7 @@ public final class Ventana extends javax.swing.JFrame {
         vistaUbicacion.setVisible(false);
         vistaContacto.setVisible(false);
         vistaFormulario.setVisible(false);
+        vistaCancelacion.setVisible(false);
     }
 
     public VistaHome getVistaHome() {
@@ -101,6 +112,10 @@ public final class Ventana extends javax.swing.JFrame {
     
     public VistaRecibo getVistaRecibo(){
         return vistaRecibo;
+    }
+    
+    public VistaCancelacion getVistaCancelacion(){
+        return vistaCancelacion;
     }
 
     public VistaFormulario getVistaFormulario() {

@@ -10,7 +10,7 @@ import java.util.Date;
 public final class Control implements ActionListener {
 
     private final Ventana ventana;
-    Conexion con= new Conexion();
+    Conexion con = new Conexion();
 
     public Control(Ventana ventana) {
         this.ventana = ventana;
@@ -27,38 +27,75 @@ public final class Control implements ActionListener {
         ventana.getVistaMenu().getBotonSalir().addActionListener(this);
         ventana.getVistaReservas().getBotonConsultar().addActionListener(this);
         ventana.getVistaReservas().getBotonReservar().addActionListener(this);
+        ventana.getVistaReservas().getBotonCancelar().addActionListener(this);
         ventana.getVistaFormulario().getBotonAgregar().addActionListener(this);
         ventana.getVistaFormulario().getBotonConsultar().addActionListener(this);
         ventana.getVistaFormulario().getBotonConfirmarReserva().addActionListener(this);
         ventana.getVistaFormulario().getBotonLimpiar().addActionListener(this);
+        ventana.getVistaCancelacion().getRadioNombre().addActionListener(this);
+        ventana.getVistaCancelacion().getRadioTelyFecha().addActionListener(this);
+        ventana.getVistaCancelacion().getBotonBuscar().addActionListener(this);
     }
 
-    public boolean queryReserva(String fechaInicial, String fechaFinal, int habitaciones, int numPersonas) {
+    public boolean queryReserva(String fechaInicial, String fechaFinal, int habitaciones, int numPersonas) { //Consulta rápida
         boolean disponible = false;
         //disponible=con.ConsultarReserva(fechaInicial, fechaFinal);
-        
         return disponible;
     }
 
-    public boolean queryReserva(String fechaInicial, String fechaFinal, int habitacionesSencillas, int habitacionesDobles, int numPersonas) {
+    public boolean queryReserva(String fechaInicial, String fechaFinal, int habitacionesSencillas, int habitacionesDobles, int numPersonas) { //Consulta completa
         //IMPLEMENTAR
         return true;
     }
 
-    public boolean queryIdReserva(int llave) {
-        //IMPLEMENTAR 
-        if (llave == 1) { // Si reserva con id llave existe
-            return true;
+    public boolean queryReserva(int llave) { //Consulta por llave primaria
+        //IMPLEMENTAR
+        return true;
+    }
+
+    public boolean queryReserva(String nombre) { //Consulta por nombre
+        //IMPLEMENTAR
+        return true;
+    }
+
+    public boolean queryReserva(String telefono, String fechaInicial) { //Consulta por telefono y fechaInicial
+        //IMPLEMENTAR
+        return true;
+    }
+
+    public boolean buscarReserva(boolean valor) {
+        if (valor) {
+            String nombre = ventana.getVistaCancelacion().getCampoNombre().getText();
+            if (queryReserva(nombre)) {
+                return true;
+            } else {
+                return false;
+            }
         } else {
-            return false;
+            String telefono = ventana.getVistaCancelacion().getCampoTelefono().getText();
+            String fechaInicial = ventana.getVistaCancelacion().getFechaInicial().getFormattedTextField().getText();
+            if (queryReserva(telefono, fechaInicial)) {
+                return true;
+            } else {
+                return false;
+            }
         }
+    }
+
+    public boolean comprobarIntegridad(Date fechaInicial, Date fechaFinal, int habitacionesSencillas, int habitacionesDobles, int numPersonas) {
+
+        return true;
+    }
+
+    public boolean comprobarIntegridad(Date fechaInicial, Date fechaFinal, int habitacionesSencillas, int habitacionesDobles,
+            int numPersonas, int numDoc) {
+
+        return true;
     }
 
     public boolean insertarReserva(int id, String nombre, String apellido, int numDoc, String tipoDoc, String telefono, String direccion, String ciudad, Date fechaNacimiento,
             Date fechaInicial, Date fechaFinal, int habitacionesSencillas, int habitacionesDobles, int numPersonas) {
         //IMPLEMENTAR
-
-        ///
         return true;
     }
 
@@ -82,7 +119,7 @@ public final class Control implements ActionListener {
         String tipoDoc = (String) ventana.getVistaFormulario().getComboTipoId().getSelectedItem();
         Date fechaNacimiento = convertirStringAFecha(fechaN);
         int idReserva = generarNumReserva();
-        while (queryIdReserva(idReserva) == true) {
+        while (queryReserva(idReserva) == true) {
             idReserva = generarNumReserva();
         }
         if (insertarReserva(idReserva, nombre, apellido, numDoc, tipoDoc, telefono, direccion, ciudad, fechaNacimiento,
@@ -97,7 +134,6 @@ public final class Control implements ActionListener {
 
     public void imprimirRecibo(int idRes, String nombre, String apell, int numDoc, String tipoDoc, String telefono, String dir,
             String ciud, String fechaN, String fechaI, String fechaF, int habCen, int habDob, int numPer) {
-
         String nombreCompleto = nombre + " " + apell;
         ventana.getVistaRecibo().getNumReserva().setText("" + idRes);
         ventana.getVistaRecibo().getNombre().setText(nombreCompleto);
@@ -141,16 +177,6 @@ public final class Control implements ActionListener {
         ventana.getVistaFormulario().getComboHabitaciones().setSelectedIndex(0);
         ventana.getVistaFormulario().getComboPersonas().setSelectedIndex(0);
         ventana.getVistaFormulario().getComboTipoHab().setSelectedIndex(0);
-    }
-
-    public boolean comprobarIntegridad(Date fechaInicial, Date fechaFinal, int habitacionesSencillas, int habitacionesDobles, int numPersonas) {
-
-        return true;
-    }
-
-    public boolean comprobarIntegridad(Date fechaInicial, Date fechaFinal, int habitacionesSencillas, int habitacionesDobles, int numPersonas, int numDoc) {
-
-        return true;
     }
 
     public Date convertirStringAFecha(String texto) {
@@ -234,6 +260,30 @@ public final class Control implements ActionListener {
         }
     }
 
+    public void elegirOpcion1() {
+        ventana.getVistaCancelacion().getRadioTelyFecha().setSelected(false);
+        ventana.getVistaCancelacion().getCampoTelefono().setEnabled(false);
+        ventana.getVistaCancelacion().getFechaInicial().setEnabled(false);
+        ventana.getVistaCancelacion().getCampoNombre().setEnabled(true);
+
+    }
+
+    public void elegirOpcion2() {
+        ventana.getVistaCancelacion().getRadioNombre().setSelected(false);
+        ventana.getVistaCancelacion().getCampoNombre().setEnabled(false);
+        ventana.getVistaCancelacion().getFechaInicial().setEnabled(true);
+        ventana.getVistaCancelacion().getCampoTelefono().setEnabled(true);
+    }
+
+    public void consultarCancelacion() {
+        boolean opcion = ventana.getVistaCancelacion().getRadioNombre().isSelected();
+        if (opcion) {
+            buscarReserva(true);
+        } else {
+            buscarReserva(false);
+        }
+    }
+
     @Override
     public void actionPerformed(ActionEvent e) {
         Object evento = e.getSource();
@@ -296,8 +346,20 @@ public final class Control implements ActionListener {
                 ventana.mostrarErrorDatosIngresados();
             }
         }
+        if (evento.equals(ventana.getVistaReservas().getBotonCancelar())) {
+            ventana.mostrarVistaCancelacion();
+        }
         if (evento.equals(ventana.getVistaMenu().getBotonLogin())) { //Ir a Login
 
+        }
+        if (evento.equals(ventana.getVistaCancelacion().getBotonBuscar())) {
+            consultarCancelacion();
+        }
+        if (evento.equals(ventana.getVistaCancelacion().getRadioNombre())) {
+            elegirOpcion1();
+        }
+        if (evento.equals(ventana.getVistaCancelacion().getRadioTelyFecha())) {
+            elegirOpcion2();
         }
         if (evento.equals(ventana.getVistaMenu().getBotonSalir())) { //Cerrar programa
             System.exit(0);

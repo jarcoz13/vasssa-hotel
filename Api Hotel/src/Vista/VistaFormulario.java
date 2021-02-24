@@ -206,7 +206,7 @@ public class VistaFormulario extends javax.swing.JFrame {
 
         botonAgregar.setFont(new java.awt.Font("Nirmala UI", 0, 11)); // NOI18N
         botonAgregar.setText("Agregar a la reserva");
-        jPanel1.add(botonAgregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 210, 131, -1));
+        jPanel1.add(botonAgregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 210, 140, 30));
 
         jLabel8.setFont(new java.awt.Font("Nirmala UI", 0, 11)); // NOI18N
         jLabel8.setText("Tu Reserva");
