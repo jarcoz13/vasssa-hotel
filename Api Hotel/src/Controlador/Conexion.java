@@ -50,7 +50,7 @@ public class Conexion {
 
         } catch (Exception e) {
 
-            System.out.println("Problema en consultaSesion");
+            System.out.println("Problema en consulta reserva");
         }
         return existe;
     }
@@ -87,7 +87,7 @@ public class Conexion {
             }
 
         } catch (Exception e) {
-            System.out.println("Error en tabla r");
+            System.out.println("Error en tabla habitacion");
         }
         hs = Integer.parseInt(datos);
         try {
@@ -98,7 +98,7 @@ public class Conexion {
             }
 
         } catch (Exception e) {
-            System.out.println("Error en tabla r");
+            System.out.println("Error en tabla habitacion");
         }
         hd = Integer.parseInt(datos);
         if (habSencilla <= hs & habDoble <= hd & disp == true) {
@@ -135,7 +135,7 @@ public class Conexion {
             }
             // INSERTA DATOS DE RESERVA
             z = s.executeUpdate(
-                    "INSERT INTO huesped (k_id_reserva,i_estado,f_inicio,f_final,q_num_diask_id_persona_tipo,k_id_persona_numero) VALUES ('"
+                    "INSERT INTO reserva (k_id_reserva,i_estado,f_inicio,f_final,q_num_diask_id_persona_tipo,k_id_persona_numero) VALUES ('"
                     + Integer.toString(idReserva) + "','" + Integer.toString(estado) + "','" + f_inicio + "','" + f_final + "','" + Integer.toString(numDias) + "','" + Integer.toString(idTipo) + "','" + Integer.toString(idNumero) + "');");
             if (z == 1) {
                 System.out.println("Se agrego la reserva de manera exitosa!");
