@@ -44,13 +44,14 @@ public class Conexion {
             rs = s.executeQuery("SELECT f_inicio,f_final FROM reserva WHERE f_inicial BETWEEN '" + f_inicial
                     + "' AND '" + f_final + "' AND f_final BETWEEN '" + f_inicial
                     + "' AND '" + f_final + "';");
+            JOptionPane.showMessageDialog(null,"Disponible");
             if (rs.next()) {
                 existe = true;
             }
 
         } catch (Exception e) {
-
-            System.out.println("Problema en consulta reserva");
+            JOptionPane.showMessageDialog(null,"No disponible");
+            System.out.println("");
         }
         return existe;
     }
@@ -71,12 +72,13 @@ public class Conexion {
             rs = s.executeQuery("SELECT f_inicio,f_final FROM reserva WHERE f_inicial BETWEEN '" + f_inicial
                     + "' AND '" + f_final + "' AND f_final BETWEEN '" + f_inicial
                     + "' AND '" + f_final + "';");
+            JOptionPane.showMessageDialog(null,"Disponible");
             if (rs.next()) {
                 disp = true;
             }
 
         } catch (Exception e) {
-
+            JOptionPane.showMessageDialog(null,"No disponible");
             System.out.println("Problema en consultaSesion");
         }
         try {
