@@ -16,7 +16,6 @@ public final class Ventana extends javax.swing.JFrame {
     private VistaInicioSesion vistaLogin;
     private VistaMenuAdmin vistaMenuAdmin;
     private VistaAdministrador vistaAdmin;
-    private VistaAdminRes vistaAdminRes;
 
     public Ventana() { //Constructor
         initComponents();
@@ -41,7 +40,6 @@ public final class Ventana extends javax.swing.JFrame {
         vistaLogin = new VistaInicioSesion();
         vistaAdmin = new VistaAdministrador();
         vistaMenuAdmin = new VistaMenuAdmin();
-        vistaAdminRes = new VistaAdminRes();
     }
 
     public void apagarVistas() {
@@ -54,21 +52,10 @@ public final class Ventana extends javax.swing.JFrame {
         vistaCancelacion.setVisible(false);
         vistaAdmin.setVisible(false);
         vistaMenuAdmin.setVisible(false);
-        vistaAdminRes.setVisible(false);
-    }
-
-    public VistaAdminRes getVistaAdminRes() {
-        return vistaAdminRes;
-    }
-
-    public void mostrarVistaAdminRes() {
-        vistaAdmin.getPanelGeneral().add(vistaAdminRes);
-        vistaAdminRes.setVisible(true);
     }
 
     public void mostrarVistaAdmin() {
         vistaAdmin.setVisible(true);
-        mostrarVistaAdminRes();
     }
 
     public void mostrarVistaMenuAdmin() {
@@ -87,12 +74,6 @@ public final class Ventana extends javax.swing.JFrame {
 
     public void ocultarVistaMenu() {
         vistaMenu.setVisible(false);
-    }
-
-    public void mostrarVistaHome() {
-        panelPrincipal.add(vistaHome);
-        vistaHome.setVisible(true);
-        //vistaHome.getFondoHome().setVisible(true);
     }
 
     public void mostrarVentana() {
@@ -139,6 +120,12 @@ public final class Ventana extends javax.swing.JFrame {
 
     public void mostrarErrorFatal() {
         JOptionPane.showMessageDialog(null, "Ocurrió un error inesperado, por favor vuelva a intentarlo", "Error", JOptionPane.WARNING_MESSAGE);
+    }
+
+    public void mostrarVistaHome() {
+        panelPrincipal.add(vistaHome);
+        vistaHome.setVisible(true);
+        vistaHome.getFondoHome().setVisible(true);
     }
 
     public void mostrarVistaReservas() {

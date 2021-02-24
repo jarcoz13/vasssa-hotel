@@ -43,9 +43,6 @@ public final class Control implements ActionListener {
         ventana.getVistaAdmin().getBotonReservas().addActionListener(this);
         ventana.getVistaMenuAdmin().getBotonCerrarSesion().addActionListener(this);
         ventana.getVistaMenuAdmin().getBotonSalir().addActionListener(this);
-        ventana.getVistaAdminRes().getBotonInsertar().addActionListener(this);
-        ventana.getVistaAdminRes().getBotonActualizar().addActionListener(this);
-        ventana.getVistaAdminRes().getBotonEliminar().addActionListener(this);
     }
 
     /* Los métodos QUERY se encargan de hacer la consulta necesaria
@@ -87,52 +84,9 @@ public final class Control implements ActionListener {
 
     public boolean insertarReserva(int id, String nombre, String apellido, int numDoc, String tipoDoc, String telefono, String direccion, String ciudad, String fechaNacimiento,
             String fechaInicial, String fechaFinal, int habitacionesSencillas, int habitacionesDobles, int numPersonas) {
-<<<<<<< HEAD
         int tipo=1;
         con.InsertarReserva(id, 1, fechaInicial, fechaFinal, 2, tipo, numDoc, apellido, nombre, direccion, ciudad, telefono, fechaNacimiento, 24);
-=======
-        //IMPLEMENTAR
->>>>>>> f862b4f0e40aa303a3e3eede8b8e89135521b836
         return true;
-    }
-    
-    public boolean actualizarReserva(int id, String nombre, String apellido, int numDoc, String tipoDoc, String telefono, String direccion, String ciudad, String fechaNacimiento,
-            String fechaInicial, String fechaFinal, int habitacionesSencillas, int habitacionesDobles, int numPersonas) {
-        //IMPLEMENTAR
-        return true;
-    }
-
-    public void eliminarReserva() {
-        String numReserva = ventana.getVistaAdminRes().getCampoID().getText();
-        //IMPLEMENTAR
-    }
-
-    public void editarRegistro(boolean valor) {
-        int numReserva = Integer.parseInt(ventana.getVistaAdminRes().getCampoID().getText());
-        String nombreCompleto[] = ventana.getVistaAdminRes().getCampoNombre().getText().split(" ");
-        String nombre = nombreCompleto[0];
-        String apellido = nombreCompleto[1];
-        int numDoc = Integer.parseInt(ventana.getVistaAdminRes().getCampoNumId().getText());
-        String tipoDoc = (String) ventana.getVistaAdminRes().getComboTipoDoc().getSelectedItem();
-        String telefono = ventana.getVistaAdminRes().getCampoTelefono().getText();
-        String dire[] = ventana.getVistaAdminRes().getCampoDir().getText().split("");
-        String direccion = dire[0];
-        String ciudad = dire[1];
-        String fechaN = ventana.getVistaAdminRes().getCampoFechaNa().getFormattedTextField().getText();
-        String fechaI = ventana.getVistaAdminRes().getCampoFechaIni().getFormattedTextField().getText();
-        String fechaFin = ventana.getVistaAdminRes().getCampoFechaFin().getFormattedTextField().getText();
-        int habSen = Integer.parseInt(ventana.getVistaAdminRes().getCampoHSen().getText());
-        int habDob = Integer.parseInt(ventana.getVistaAdminRes().getCampoHDob().getText());
-        int numPer = Integer.parseInt(ventana.getVistaAdminRes().getCampoPer().getText());
-
-        if (valor) {
-            insertarReserva(numReserva, nombre, apellido, numDoc, tipoDoc, telefono, direccion, ciudad, fechaN, fechaI,
-                    fechaFin, habSen, habDob, numPer);
-        } else {
-            actualizarReserva(numReserva, nombre, apellido, numDoc, tipoDoc, telefono, direccion, ciudad, fechaN, fechaI,
-                    fechaFin, habSen, habDob, numPer);
-        }
-
     }
 
     public boolean buscarReserva(boolean valor) {
@@ -188,8 +142,8 @@ public final class Control implements ActionListener {
         while (queryReserva(idReserva) == true) {
             idReserva = generarNumReserva();
         }
-        if (insertarReserva(idReserva, nombre, apellido, numDoc, tipoDoc, telefono, direccion, ciudad, fechaN,
-                fechaI, fechaF, habitacionesSencillas, habitacionesDobles, numPersonas)) {
+        if (insertarReserva(idReserva, nombre, apellido, numDoc, tipoDoc, telefono, direccion, ciudad, fechaNacimiento,
+                fechaInicial, fechaFinal, habitacionesSencillas, habitacionesDobles, numPersonas)) {
             imprimirRecibo(idReserva, nombre, apellido, numDoc, tipoDoc, telefono, direccion, ciudad, fechaN, fechaI, fechaF,
                     habitacionesSencillas, habitacionesDobles, numPersonas);
             return true;
@@ -357,7 +311,6 @@ public final class Control implements ActionListener {
         if (queryUsuario(user, password)) {
             ventana.ocultarVistaLogin();
             ventana.ocultarVentana();
-            ventana.apagarVistas();
             ventana.mostrarVistaAdmin();
         } else {
             ventana.mostrarErrorDatosIngresados();
@@ -456,27 +409,6 @@ public final class Control implements ActionListener {
         if (evento.equals(ventana.getVistaMenuAdmin().getBotonCerrarSesion())) {
             ventana.apagarVistas();
             ventana.mostrarVentana();
-        }
-        if (evento.equals(ventana.getVistaAdminRes().getBotonInsertar())) {
-            try {
-                editarRegistro(true);
-            } catch (Exception excepcion) {
-                ventana.mostrarErrorDatosIngresados();
-            }
-        }
-        if(evento.equals(ventana.getVistaAdminRes().getBotonEliminar())){
-           try {
-                eliminarReserva();
-            } catch (Exception excepcion) {
-                ventana.mostrarErrorDatosIngresados();
-            } 
-        }
-        if(evento.equals(ventana.getVistaAdminRes().getBotonActualizar())){
-           try {
-                editarRegistro(false);
-            } catch (Exception excepcion) {
-                ventana.mostrarErrorDatosIngresados();
-            } 
         }
         if (evento.equals(ventana.getVistaLogin().getBotonIngreso())) {
             iniciarSesion();
