@@ -36,14 +36,19 @@ public final class Control implements ActionListener {
         ventana.getVistaCancelacion().getRadioTelyFecha().addActionListener(this);
         ventana.getVistaCancelacion().getBotonBuscar().addActionListener(this);
         ventana.getVistaLogin().getBotonIngreso().addActionListener(this);
+        ventana.getVistaAdmin().getBotonEmpleados().addActionListener(this);
+        ventana.getVistaAdmin().getBotonMenu().addActionListener(this);
+        ventana.getVistaAdmin().getBotonHabitaciones().addActionListener(this);
+        ventana.getVistaAdmin().getBotonHuespeds().addActionListener(this);
+        ventana.getVistaAdmin().getBotonReservas().addActionListener(this);
+        ventana.getVistaMenuAdmin().getBotonCerrarSesion().addActionListener(this);
+        ventana.getVistaMenuAdmin().getBotonSalir().addActionListener(this);
     }
-    
+
     /* Los métodos QUERY se encargan de hacer la consulta necesaria
        todos son de tipo BOOLEAN y deben retornar TRUE si lo que se busca
         consultar existe o FALSE si no
-    */
-    
-    
+     */
     public boolean queryReserva(String fechaInicial, String fechaFinal, int habitaciones, int numPersonas) { //Consulta rápida
         boolean disponible = false;
         //disponible=con.ConsultarReserva(fechaInicial, fechaFinal);
@@ -69,18 +74,17 @@ public final class Control implements ActionListener {
         //IMPLEMENTAR
         return true;
     }
-    
-    public boolean queryUsuario(String usuario, String password){ //Consulta de usuario
+
+    public boolean queryUsuario(String usuario, String password) { //Consulta de usuario
         //IMPLEMENTAR
         return true;
     }
-    
+
     public boolean insertarReserva(int id, String nombre, String apellido, int numDoc, String tipoDoc, String telefono, String direccion, String ciudad, Date fechaNacimiento,
             Date fechaInicial, Date fechaFinal, int habitacionesSencillas, int habitacionesDobles, int numPersonas) {
         //IMPLEMENTAR
         return true;
     }
-    
 
     public boolean buscarReserva(boolean valor) {
         if (valor) {
@@ -296,20 +300,18 @@ public final class Control implements ActionListener {
             buscarReserva(false);
         }
     }
-    
-    public boolean queryUsuario(String usuario, String password){
-        //IMPLEMENTAR
-        return true;
-    }
-    
-    public void iniciarSesion(){
+
+    public void iniciarSesion() {
         String user = ventana.getVistaLogin().getCampoUsuario().getText();
         char[] pass = ventana.getVistaLogin().getCampoContraseña().getPassword();
         String password = new String(pass);
-        if(queryUsuario(user, password)){
-            
-        }else{
+        if (queryUsuario(user, password)) {
+            ventana.ocultarVistaLogin();
+            ventana.ocultarVentana();
+            ventana.mostrarVistaAdmin();
+        } else {
             ventana.mostrarErrorDatosIngresados();
+            ventana.mostrarVistaLogin();
         }
     }
 
@@ -325,6 +327,13 @@ public final class Control implements ActionListener {
                 ventana.ocultarVistaMenu();
             } else {
                 ventana.mostrarVistaMenu();
+            }
+        }
+        if (evento.equals(ventana.getVistaAdmin().getBotonMenu())) { //Desplegar/Ocultar menu lateral
+            if (ventana.getVistaMenuAdmin().isVisible()) {
+                ventana.ocultarVistaMenuAdmin();
+            } else {
+                ventana.mostrarVistaMenuAdmin();
             }
         }
         if (evento.equals(ventana.getBotonReservas())) { //Ir a reservas
@@ -390,10 +399,15 @@ public final class Control implements ActionListener {
         if (evento.equals(ventana.getVistaCancelacion().getRadioTelyFecha())) {
             elegirOpcion2();
         }
-        if (evento.equals(ventana.getVistaMenu().getBotonSalir())) { //Cerrar programa
+        if (evento.equals(ventana.getVistaMenu().getBotonSalir())
+                || evento.equals(ventana.getVistaMenuAdmin().getBotonSalir())) { //Cerrar programa
             System.exit(0);
         }
-        if(evento.equals(ventana.getVistaLogin().getBotonIngreso())){
+        if (evento.equals(ventana.getVistaMenuAdmin().getBotonCerrarSesion())) {
+            ventana.apagarVistas();
+            ventana.mostrarVentana();
+        }
+        if (evento.equals(ventana.getVistaLogin().getBotonIngreso())) {
             iniciarSesion();
         }
     }

@@ -14,6 +14,8 @@ public final class Ventana extends javax.swing.JFrame {
     private VistaRecibo vistaRecibo;
     private VistaCancelacion vistaCancelacion;
     private VistaInicioSesion vistaLogin;
+    private VistaMenuAdmin vistaMenuAdmin;
+    private VistaAdministrador vistaAdmin;
 
     public Ventana() { //Constructor
         initComponents();
@@ -36,6 +38,59 @@ public final class Ventana extends javax.swing.JFrame {
         vistaRecibo = new VistaRecibo();
         vistaCancelacion = new VistaCancelacion();
         vistaLogin = new VistaInicioSesion();
+        vistaAdmin = new VistaAdministrador();
+        vistaMenuAdmin = new VistaMenuAdmin();
+    }
+
+    public void apagarVistas() {
+        vistaHome.setVisible(false);
+        vistaMenu.setVisible(false);
+        vistaReservas.setVisible(false);
+        vistaUbicacion.setVisible(false);
+        vistaContacto.setVisible(false);
+        vistaFormulario.setVisible(false);
+        vistaCancelacion.setVisible(false);
+        vistaAdmin.setVisible(false);
+        vistaMenuAdmin.setVisible(false);
+    }
+
+    public void mostrarVistaAdmin() {
+        vistaAdmin.setVisible(true);
+    }
+
+    public void mostrarVistaMenuAdmin() {
+        vistaAdmin.getPanelMenu().add(vistaMenuAdmin);
+        vistaMenuAdmin.setVisible(true);
+    }
+
+    public void ocultarVistaMenuAdmin() {
+        vistaMenuAdmin.setVisible(false);
+    }
+
+    public void mostrarVistaMenu() {
+        panelMenu.add(vistaMenu);
+        vistaMenu.setVisible(true);
+    }
+
+    public void ocultarVistaMenu() {
+        vistaMenu.setVisible(false);
+    }
+
+    public void mostrarVentana() {
+        this.setVisible(true);
+        mostrarVistaHome();
+    }
+
+    public VistaAdministrador getVistaAdmin() {
+        return vistaAdmin;
+    }
+
+    public VistaMenuAdmin getVistaMenuAdmin() {
+        return vistaMenuAdmin;
+    }
+
+    public void ocultarVentana() {
+        this.setVisible(false);
     }
 
     public void mostrarVistaFormularioReserva() {
@@ -96,25 +151,6 @@ public final class Ventana extends javax.swing.JFrame {
     public void ocultarVistaLogin() {
         vistaLogin.setVisible(false);
         vistaLogin.dispose();
-    }
-
-    public void mostrarVistaMenu() {
-        panelMenu.add(vistaMenu);
-        vistaMenu.setVisible(true);
-    }
-
-    public void ocultarVistaMenu() {
-        vistaMenu.setVisible(false);
-    }
-
-    public void apagarVistas() {
-        vistaHome.setVisible(false);
-        vistaMenu.setVisible(false);
-        vistaReservas.setVisible(false);
-        vistaUbicacion.setVisible(false);
-        vistaContacto.setVisible(false);
-        vistaFormulario.setVisible(false);
-        vistaCancelacion.setVisible(false);
     }
 
     public VistaHome getVistaHome() {
