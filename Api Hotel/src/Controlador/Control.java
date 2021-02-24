@@ -33,14 +33,14 @@ public final class Control implements ActionListener {
         ventana.getVistaFormulario().getBotonLimpiar().addActionListener(this);
     }
 
-    public boolean queryReserva(Date fechaInicial, Date fechaFinal, int habitaciones, int numPersonas) {
+    public boolean queryReserva(String fechaInicial, String fechaFinal, int habitaciones, int numPersonas) {
         boolean disponible = false;
-        disponible=con.ConsultarReserva(fechaInicial, fechaFinal);
+        //disponible=con.ConsultarReserva(fechaInicial, fechaFinal);
         
         return disponible;
     }
 
-    public boolean queryReserva(Date fechaInicial, Date fechaFinal, int habitacionesSencillas, int habitacionesDobles, int numPersonas) {
+    public boolean queryReserva(String fechaInicial, String fechaFinal, int habitacionesSencillas, int habitacionesDobles, int numPersonas) {
         //IMPLEMENTAR
         return true;
     }
@@ -207,7 +207,7 @@ public final class Control implements ActionListener {
                 Date fechaFinal = convertirStringAFecha(fechaF);
                 int numPersonas = Integer.parseInt(numP);
                 int numHabitaciones = Integer.parseInt(numH);
-                return queryReserva(fechaInicial, fechaFinal, numPersonas, numHabitaciones);
+                return queryReserva(fechaI, fechaF, numPersonas, numHabitaciones);
             }
         } else {
             int numPersonas = Integer.parseInt(ventana.getVistaFormulario().getNumPersonasReservadas().getText());
@@ -218,7 +218,7 @@ public final class Control implements ActionListener {
             Date fechaInicial = convertirStringAFecha(fechaI);
             Date fechaFinal = convertirStringAFecha(fechaF);
             if (comprobarIntegridad(fechaInicial, fechaFinal, habitacionesSencillas, habitacionesDobles, numPersonas)) { //Comprobaciones de reservación
-                return queryReserva(fechaInicial, fechaFinal, habitacionesSencillas, habitacionesDobles, numPersonas);
+                return queryReserva(fechaI, fechaF, habitacionesSencillas, habitacionesDobles, numPersonas);
             }
             return false;
         }
