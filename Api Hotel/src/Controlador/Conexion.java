@@ -147,12 +147,12 @@ public class Conexion {
     }
 
     //MODIFICAR ESTADO DE UNA RESERVA POR NOMBRE
-    public void modResNom(String nombre) {
+    public void modResNom(String nombre, int estado) {
         Statement s = null;
 
         try {
             s = connection.createStatement();
-            s.executeUpdate("");
+            s.executeUpdate("update reserva set i_estado="+estado+" from reserva r INNER JOIN persona p ON p.k_id_persona_tipo=r.k_id_persona_tipo where p.n_nombre = '"+nombre+"'");
         } catch (Exception e) {
 
             System.out.println("Problema en Reserva");
@@ -160,7 +160,7 @@ public class Conexion {
     }
     
     //MODIFICAR ESTADO DE UNA RESERVA POR NUMERO Y FECHA
-    public void modResNumFecha(String numero, Date fecha) {
+    public void modResNumFecha(String numero, Date fecha, int estado) {
         Statement s = null;
 
         try {
