@@ -54,13 +54,13 @@ public final class Control implements ActionListener {
      */
     public boolean queryReserva(String fechaInicial, String fechaFinal, int habitaciones, int numPersonas) { //Consulta rápida
         boolean disponible = false;
-        disponible=con.ConsultarReserva(fechaInicial, fechaFinal);
+        disponible = con.ConsultarReserva(fechaInicial, fechaFinal);
         return disponible;
     }
 
     public boolean queryReserva(String fechaInicial, String fechaFinal, int habitacionesSencillas, int habitacionesDobles, int numPersonas) { //Consulta completa
         boolean disponible = false;
-        disponible=con.ConsultarReservaComp(fechaInicial, fechaFinal, habitacionesSencillas, habitacionesDobles, numPersonas);
+        disponible = con.ConsultarReservaComp(fechaInicial, fechaFinal, habitacionesSencillas, habitacionesDobles, numPersonas);
         return disponible;
     }
 
@@ -90,7 +90,7 @@ public final class Control implements ActionListener {
         //IMPLEMENTAR
         return true;
     }
-    
+
     public boolean actualizarReserva(int id, String nombre, String apellido, int numDoc, String tipoDoc, String telefono, String direccion, String ciudad, String fechaNacimiento,
             String fechaInicial, String fechaFinal, int habitacionesSencillas, int habitacionesDobles, int numPersonas) {
         //IMPLEMENTAR
@@ -416,16 +416,16 @@ public final class Control implements ActionListener {
             }
         }
         if (evento.equals(ventana.getVistaFormulario().getBotonConsultar())) { //Consultar reserva completa
-            if (consultarReserva(false)) {
-
-            } else {
+            try {
+                consultarReserva(false);
+            } catch (Exception excepcion) {
                 ventana.mostrarErrorDatosIngresados();
             }
         }
         if (evento.equals(ventana.getVistaReservas().getBotonConsultar())) { //Consultar reserva parcial
-            if (consultarReserva(true)) {
-
-            } else {
+            try {
+                consultarReserva(true);
+            } catch (Exception excepcion) {
                 ventana.mostrarErrorDatosIngresados();
             }
         }
@@ -459,19 +459,19 @@ public final class Control implements ActionListener {
                 ventana.mostrarErrorDatosIngresados();
             }
         }
-        if(evento.equals(ventana.getVistaAdminRes().getBotonEliminar())){
-           try {
+        if (evento.equals(ventana.getVistaAdminRes().getBotonEliminar())) {
+            try {
                 eliminarReserva();
             } catch (Exception excepcion) {
                 ventana.mostrarErrorDatosIngresados();
-            } 
+            }
         }
-        if(evento.equals(ventana.getVistaAdminRes().getBotonActualizar())){
-           try {
+        if (evento.equals(ventana.getVistaAdminRes().getBotonActualizar())) {
+            try {
                 editarRegistro(false);
             } catch (Exception excepcion) {
                 ventana.mostrarErrorDatosIngresados();
-            } 
+            }
         }
         if (evento.equals(ventana.getVistaLogin().getBotonIngreso())) {
             iniciarSesion();
