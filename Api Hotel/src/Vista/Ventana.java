@@ -10,7 +10,7 @@ public final class Ventana extends javax.swing.JFrame {
     private VistaReservas vistaReservas;
     private VistaUbicacion vistaUbicacion;
     private VistaContacto vistaContacto;
-    private FormularioReserva formularioReserva;
+    private VistaFormulario vistaFormulario;
 
     public Ventana() { //Constructor
         initComponents();
@@ -29,21 +29,18 @@ public final class Ventana extends javax.swing.JFrame {
         vistaReservas = new VistaReservas();
         vistaUbicacion = new VistaUbicacion();
         vistaContacto = new VistaContacto();
-        formularioReserva = new FormularioReserva();
-    }
-
-    public boolean formularioExiste() {
-        if (formularioReserva != null) {
-            return true;
-        }
-        return false;
+        vistaFormulario = new VistaFormulario();
     }
 
     public void mostrarVistaFormularioReserva() {
-        JOptionPane.showOptionDialog(null, formularioReserva, "Hacer una Reservación", JOptionPane.PLAIN_MESSAGE, JOptionPane.PLAIN_MESSAGE, null, new Object[]{}, null);
+        vistaFormulario.setVisible(true);
     }
     
-    public void mostrarErrorDatosIngresados(){
+    public void ocultarVistaFormulario(){
+        vistaFormulario.dispose();
+    }
+
+    public void mostrarErrorDatosIngresados() {
         JOptionPane.showMessageDialog(null, "Revise que los datos que ingresó sean válidos", "Error", JOptionPane.WARNING_MESSAGE);
     }
 
@@ -84,14 +81,15 @@ public final class Ventana extends javax.swing.JFrame {
         vistaReservas.setVisible(false);
         vistaUbicacion.setVisible(false);
         vistaContacto.setVisible(false);
+        vistaFormulario.setVisible(false);
     }
 
     public VistaHome getVistaHome() {
         return vistaHome;
     }
 
-    public FormularioReserva getFormularioReserva() {
-        return formularioReserva;
+    public VistaFormulario getVistaFormulario() {
+        return vistaFormulario;
     }
 
     public VistaMenu getVistaMenu() {
@@ -109,8 +107,8 @@ public final class Ventana extends javax.swing.JFrame {
     public VistaContacto getVistaContacto() {
         return vistaContacto;
     }
-    
-    public JButton getBotonReservas(){
+
+    public JButton getBotonReservas() {
         return botonReservas;
     }
 
@@ -129,7 +127,9 @@ public final class Ventana extends javax.swing.JFrame {
     public JButton getBotonMenu() {
         return botonMenu;
     }
-
+    
+    
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {

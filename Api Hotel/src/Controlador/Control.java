@@ -28,10 +28,10 @@ public final class Control implements ActionListener {
         ventana.getVistaMenu().getBotonSalir().addActionListener(this);
         ventana.getVistaReservas().getBotonConsultar().addActionListener(this);
         ventana.getVistaReservas().getBotonReservar().addActionListener(this);
-        ventana.getFormularioReserva().getBotonAgregar().addActionListener(this);
-        ventana.getFormularioReserva().getBotonConsultar().addActionListener(this);
-        ventana.getFormularioReserva().getBotonConfirmarReserva().addActionListener(this);
-        ventana.getFormularioReserva().getBotonLimpiar().addActionListener(this);
+        ventana.getVistaFormulario().getBotonAgregar().addActionListener(this);
+        ventana.getVistaFormulario().getBotonConsultar().addActionListener(this);
+        ventana.getVistaFormulario().getBotonConfirmarReserva().addActionListener(this);
+        ventana.getVistaFormulario().getBotonLimpiar().addActionListener(this);
     }
     
     public boolean queryReserva(Date fechaInicial, Date fechaFinal, int habitaciones, int numPersonas) {
@@ -52,25 +52,25 @@ public final class Control implements ActionListener {
     public void llenarFormulario() {
         String fechaI = ventana.getVistaReservas().getFechaInicioRes().getFormattedTextField().getText();
         String fechaF = ventana.getVistaReservas().getFechaFinRes().getFormattedTextField().getText();
-        ventana.getFormularioReserva().getFechaInicial().getFormattedTextField().setText(fechaI);
-        ventana.getFormularioReserva().getFechaFinal().getFormattedTextField().setText(fechaF);
+        ventana.getVistaFormulario().getFechaInicial().getFormattedTextField().setText(fechaI);
+        ventana.getVistaFormulario().getFechaFinal().getFormattedTextField().setText(fechaF);
     }
     
     public void limpiarFormulario() {
         restablecerCombos();
-        ventana.getFormularioReserva().getComboTipoId().setSelectedIndex(0);
-        ventana.getFormularioReserva().getNumPersonasReservadas().setText("0");
-        ventana.getFormularioReserva().getNumHabDoblesReservadas().setText("0");
-        ventana.getFormularioReserva().getNumHabSencillasReservadas().setText("0");
-        ventana.getFormularioReserva().getFechaInicial().getFormattedTextField().setText("");
-        ventana.getFormularioReserva().getFechaFinal().getFormattedTextField().setText("");
-        ventana.getFormularioReserva().getNumId().setText("");
+        ventana.getVistaFormulario().getComboTipoId().setSelectedIndex(0);
+        ventana.getVistaFormulario().getNumPersonasReservadas().setText("0");
+        ventana.getVistaFormulario().getNumHabDoblesReservadas().setText("0");
+        ventana.getVistaFormulario().getNumHabSencillasReservadas().setText("0");
+        ventana.getVistaFormulario().getFechaInicial().getFormattedTextField().setText("");
+        ventana.getVistaFormulario().getFechaFinal().getFormattedTextField().setText("");
+        ventana.getVistaFormulario().getNumId().setText("");
     }
     
     public void restablecerCombos() {
-        ventana.getFormularioReserva().getComboHabitaciones().setSelectedIndex(0);
-        ventana.getFormularioReserva().getComboPersonas().setSelectedIndex(0);
-        ventana.getFormularioReserva().getComboTipoHab().setSelectedIndex(0);
+        ventana.getVistaFormulario().getComboHabitaciones().setSelectedIndex(0);
+        ventana.getVistaFormulario().getComboPersonas().setSelectedIndex(0);
+        ventana.getVistaFormulario().getComboTipoHab().setSelectedIndex(0);
     }
     
     public boolean comprobarIntegridad(Date fechaInicial, Date fechaFinal, int habitacionesSencillas, int habitacionesDobles, int numPersonas) {
@@ -92,32 +92,32 @@ public final class Control implements ActionListener {
     }
     
     public String obtenerTipoHab() {
-        String tipo = (String) ventana.getFormularioReserva().getComboTipoHab().getSelectedItem();
+        String tipo = (String) ventana.getVistaFormulario().getComboTipoHab().getSelectedItem();
         return tipo;
     }
     
     public boolean añadirAlaReserva() {
         System.out.println("Entro 1");
-        String fechaI = ventana.getFormularioReserva().getFechaInicial().getFormattedTextField().getText();
-        String fechaF = ventana.getFormularioReserva().getFechaFinal().getFormattedTextField().getText();
+        String fechaI = ventana.getVistaFormulario().getFechaInicial().getFormattedTextField().getText();
+        String fechaF = ventana.getVistaFormulario().getFechaFinal().getFormattedTextField().getText();
         Date fechaInicial = convertirStringAFecha(fechaI);
         Date fechaFinal = convertirStringAFecha(fechaF);
         int habitacionesSencillas = 0;
         int habitacionesDobles = 0;
-        int numPersonas = Integer.parseInt((String) ventana.getFormularioReserva().getComboPersonas().getSelectedItem());
-        int numHabitaciones = Integer.parseInt((String) ventana.getFormularioReserva().getComboHabitaciones().getSelectedItem());
+        int numPersonas = Integer.parseInt((String) ventana.getVistaFormulario().getComboPersonas().getSelectedItem());
+        int numHabitaciones = Integer.parseInt((String) ventana.getVistaFormulario().getComboHabitaciones().getSelectedItem());
         if ("Sencilla".equals(obtenerTipoHab())) {
             habitacionesSencillas = numHabitaciones;
         } else {
             habitacionesDobles = numHabitaciones;
         }
         if (comprobarIntegridad(fechaInicial, fechaFinal, habitacionesSencillas, habitacionesDobles, numPersonas)) {
-            numPersonas = Integer.parseInt(ventana.getFormularioReserva().getNumPersonasReservadas().getText()) + numPersonas;
-            habitacionesSencillas = Integer.parseInt(ventana.getFormularioReserva().getNumHabSencillasReservadas().getText()) + habitacionesSencillas;
-            habitacionesDobles = Integer.parseInt(ventana.getFormularioReserva().getNumHabDoblesReservadas().getText()) + habitacionesDobles;
-            ventana.getFormularioReserva().getNumPersonasReservadas().setText("" + numPersonas);
-            ventana.getFormularioReserva().getNumHabSencillasReservadas().setText("" + habitacionesSencillas);
-            ventana.getFormularioReserva().getNumHabDoblesReservadas().setText("" + habitacionesDobles);
+            numPersonas = Integer.parseInt(ventana.getVistaFormulario().getNumPersonasReservadas().getText()) + numPersonas;
+            habitacionesSencillas = Integer.parseInt(ventana.getVistaFormulario().getNumHabSencillasReservadas().getText()) + habitacionesSencillas;
+            habitacionesDobles = Integer.parseInt(ventana.getVistaFormulario().getNumHabDoblesReservadas().getText()) + habitacionesDobles;
+            ventana.getVistaFormulario().getNumPersonasReservadas().setText("" + numPersonas);
+            ventana.getVistaFormulario().getNumHabSencillasReservadas().setText("" + habitacionesSencillas);
+            ventana.getVistaFormulario().getNumHabDoblesReservadas().setText("" + habitacionesDobles);
             return true;
         } else {
             return false;
@@ -140,11 +140,11 @@ public final class Control implements ActionListener {
                 return queryReserva(fechaInicial, fechaFinal, numPersonas, numHabitaciones);
             }
         } else {
-            int numPersonas = Integer.parseInt(ventana.getFormularioReserva().getNumPersonasReservadas().getText());
-            int habitacionesSencillas = Integer.parseInt(ventana.getFormularioReserva().getNumHabSencillasReservadas().getText());
-            int habitacionesDobles = Integer.parseInt(ventana.getFormularioReserva().getNumHabDoblesReservadas().getText());
-            fechaI = ventana.getFormularioReserva().getFechaInicial().getFormattedTextField().getText();
-            fechaF = ventana.getFormularioReserva().getFechaFinal().getFormattedTextField().getText();
+            int numPersonas = Integer.parseInt(ventana.getVistaFormulario().getNumPersonasReservadas().getText());
+            int habitacionesSencillas = Integer.parseInt(ventana.getVistaFormulario().getNumHabSencillasReservadas().getText());
+            int habitacionesDobles = Integer.parseInt(ventana.getVistaFormulario().getNumHabDoblesReservadas().getText());
+            fechaI = ventana.getVistaFormulario().getFechaInicial().getFormattedTextField().getText();
+            fechaF = ventana.getVistaFormulario().getFechaFinal().getFormattedTextField().getText();
             Date fechaInicial = convertirStringAFecha(fechaI);
             Date fechaFinal = convertirStringAFecha(fechaF);
             if (comprobarIntegridad(fechaInicial, fechaFinal, habitacionesSencillas, habitacionesDobles, numPersonas)) { //Comprobaciones de reservación
@@ -184,20 +184,20 @@ public final class Control implements ActionListener {
             llenarFormulario();
             ventana.mostrarVistaFormularioReserva();
         }
-        if (evento.equals(ventana.getFormularioReserva().getBotonAgregar())) {//Añadir datos a la reserva
+        if (evento.equals(ventana.getVistaFormulario().getBotonAgregar())) {//Añadir datos a la reserva
             añadirAlaReserva();
         }
-        if (evento.equals(ventana.getFormularioReserva().getBotonLimpiar())) {//Limpiar formulario
+        if (evento.equals(ventana.getVistaFormulario().getBotonLimpiar())) {//Limpiar formulario
             limpiarFormulario();
         }
-        if (evento.equals(ventana.getFormularioReserva().getBotonConfirmarReserva())) {//ConfirmarReserva
+        if (evento.equals(ventana.getVistaFormulario().getBotonConfirmarReserva())) {//ConfirmarReserva
             if (confirmarReserva()) {
                 limpiarFormulario();
             } else {
                 System.out.println("La reserva Falló");
             }
         }
-        if (evento.equals(ventana.getFormularioReserva().getBotonConsultar())) { //Consultar reserva completa
+        if (evento.equals(ventana.getVistaFormulario().getBotonConsultar())) { //Consultar reserva completa
             if (consultarReserva(false)) {
                 
             } else {
