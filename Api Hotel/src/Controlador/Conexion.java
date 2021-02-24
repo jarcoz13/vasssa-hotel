@@ -33,7 +33,7 @@ public class Conexion {
     }
 
     //METODO CONSULTAR RESERVA DISPONIBLE SIMP
-    public boolean ConsultarReserva(Date f_inicial, Date f_final) {
+    public boolean ConsultarReserva(String f_inicial, String f_final) {
 
         boolean existe = false;
         ResultSet rs = null;
@@ -55,7 +55,7 @@ public class Conexion {
     }
 
     //METODO CONSULTAR RESERVA DISPONIBLE COMP
-    public boolean ConsultarReservaComp(Date f_inicial, Date f_final, int habSencilla, int habDoble, int numPersonas) {
+    public boolean ConsultarReservaComp(String f_inicial, String f_final, int habSencilla, int habDoble, int numPersonas) {
 
         boolean disp = false;
         boolean existe = false;
@@ -109,15 +109,15 @@ public class Conexion {
     }
 
     //METODO CONFIRMAR RESERVA
-    public void InsertarReserva(int idReserva, int estado, Date f_inicio, Date f_final, int numDias,
-            int idTipo, int idNumero, String apellido, String nombre, String direccion, String ciudad, String telefono, Date fNacimiento, int edad) {
+    public void InsertarReserva(int idReserva, int estado, String f_inicio, String f_final, int numDias,
+            int idTipo, int idNumero, String apellido, String nombre, String direccion, String ciudad, String telefono, String fNacimiento, int edad) {
         Statement s = null;
         try {
             s = connection.createStatement();
             // INSERTA DATOS DE PERSONA
             int z = s.executeUpdate(
                     "INSERT INTO persona (k_id_persona_tipo,k_id_persona_numero,n_apellido,n_nombre) VALUES ('"
-                    + idTipo + "','" + idNumero + "','" + apellido + "','" + nombre + "');");
+                    + Integer.toString(idTipo) + "','" + Integer.toString(idNumero) + "','" + apellido + "','" + nombre + "');");
             if (z == 1) {
                 System.out.println("Se agrego la persona de manera exitosa!");
             } else {
@@ -126,7 +126,7 @@ public class Conexion {
             // INSERTA DATOS DE HUESPED
             z = s.executeUpdate(
                     "INSERT INTO huesped (k_id_persona_tipo,k_id_persona_numero,n_direccion_residencia,n_ciudad_residencia,q_telefono,f_fecha_nacimiento,q_edad) VALUES ('"
-                    + idTipo + "','" + idNumero + "','" + direccion + "','" + ciudad + "','" + telefono + "','" + fNacimiento + "','" + edad + "');");
+                    + Integer.toString(idTipo) + "','" + Integer.toString(idNumero) + "','" + direccion + "','" + ciudad + "','" + telefono + "','" + fNacimiento + "','" + Integer.toString(edad) + "');");
             if (z == 1) {
                 System.out.println("Se agrego el huesped de manera exitosa!");
             } else {
@@ -135,7 +135,7 @@ public class Conexion {
             // INSERTA DATOS DE RESERVA
             z = s.executeUpdate(
                     "INSERT INTO huesped (k_id_reserva,i_estado,f_inicio,f_final,q_num_diask_id_persona_tipo,k_id_persona_numero) VALUES ('"
-                    + idReserva + "','" + estado + "','" + f_inicio + "','" + f_final + "','" + numDias + "','" + idTipo + "','" + idNumero + "');");
+                    + Integer.toString(idReserva) + "','" + Integer.toString(estado) + "','" + f_inicio + "','" + f_final + "','" + Integer.toString(numDias) + "','" + Integer.toString(idTipo) + "','" + Integer.toString(idNumero) + "');");
             if (z == 1) {
                 System.out.println("Se agrego la reserva de manera exitosa!");
             } else {
@@ -160,7 +160,7 @@ public class Conexion {
     }
     
     //MODIFICAR ESTADO DE UNA RESERVA POR NUMERO Y FECHA
-    public void modResNumFecha(String numero, Date fecha, int estado) {
+    public void modResNumFecha(String numero, String fecha, int estado) {
         Statement s = null;
 
         try {
@@ -172,6 +172,37 @@ public class Conexion {
         }
     }
 
+    //CONSULTAR RESERVA POR EL NOMBRE 
+    public void printConsultaReserva(String nombre) {
+
+        ResultSet rs = null;
+        String[] datos = new String[4];
+        Statement s = null;
+        try {
+
+            s = connection.createStatement();
+            rs = s.executeQuery("SELECT r.* FROM reserva r LEFT JOIN persona p ON p.k_id_persona_tipo=r.k_id_persona_tipo where p.n_nombre = '"+nombre+"'");
+
+            while (rs.next()) {
+                datos[0] = rs.getString(1);
+                System.out.println(datos[0]);
+                datos[1] = rs.getString(2);
+                System.out.println(datos[1]);
+                datos[2] = rs.getString(3);
+                System.out.println(datos[2]);
+                datos[3] = rs.getString(4);
+                System.out.println(datos[3]);
+                datos[4] = rs.getString(5);
+                System.out.println(datos[3]);
+                datos[5] = rs.getString(6);
+                System.out.println(datos[3]);
+                datos[6] = rs.getString(7);
+                System.out.println(datos[3]);
+            }
+        } catch (Exception e) {
+            System.out.println("Error en tabla");
+        }
+    }
     //METODO MOSTRAR HABITACIONES
     public void printHabitaciones(JTable tabla) {
         ResultSet rs = null;

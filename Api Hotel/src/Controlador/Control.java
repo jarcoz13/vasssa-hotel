@@ -156,7 +156,7 @@ public final class Control implements ActionListener {
     public Date convertirStringAFecha(String texto) {
         Date fecha = null;
         try {
-            fecha = new SimpleDateFormat("dd/MM/yyyy").parse(texto);
+            fecha = new SimpleDateFormat("yyyy/MM/dd").parse(texto);
         } catch (ParseException ex) {
         }
         return fecha;
