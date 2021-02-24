@@ -5,6 +5,8 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
 public class Conexion {
+    
+    Connection connection;
 
     public void conectarBD(String host, String port, String database,
             String user, String password) {
@@ -28,9 +30,6 @@ public class Conexion {
             System.out.println("Error al conectar con (" + url + "): " + sqle);
         }
     }
-<<<<<<< HEAD
-=======
-
     //METODO CONSULTAR RESERVA DISPONIBLE SIMP
     public boolean ConsultarSesion(String f_inicio, String f_final) {
 
@@ -189,5 +188,4 @@ public class Conexion {
         }
 
     }
->>>>>>> bac33c2508b6ffcb6aba84cbe349a75afa063845
 }
