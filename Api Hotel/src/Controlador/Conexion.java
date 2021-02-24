@@ -8,6 +8,9 @@ import java.sql.*;
 
 public class Conexion {
 
+    Connection connection;
+
+    //CONEXION 
     public void conectarBD(String host, String port, String database,
             String user, String password) {
         String url = "";
@@ -18,7 +21,7 @@ public class Conexion {
             } catch (ClassNotFoundException ex) {
                 System.out.println("Error al registrar el driver de PostgreSQL: " + ex);
             }
-            Connection connection = null;
+            connection = null;
             url = "jdbc:postgresql://" + host + ":" + port + "/" + database;
             // Coneccion
             connection = DriverManager.getConnection(
@@ -30,4 +33,46 @@ public class Conexion {
             System.out.println("Error al conectar con (" + url + "): " + sqle);
         }
     }
+
+    //METODO CONSULTAR RESERVA DISPONIBLE SIMP
+    //METODO CONSULTAR RESERVA DISPONIBLE COMP
+    //METODO CONFIRMAR RESERVA
+    public void InsertarReserva(int idReserva, int estado, Date f_inicio, Date f_final, int numDias,
+            int idTipo, int idNumero, String apellido, String nombre, String direccion, String ciudad, int telefono, Date fNacimiento, int edad) {
+        Statement s = null;
+        try {
+            s = connection.createStatement();
+            // INSERTA DATOS DE PERSONA
+            int z = s.executeUpdate(
+                    "INSERT INTO persona (k_id_persona_tipo,k_id_persona_numero,n_apellido,n_nombre) VALUES ('"
+                    + idTipo + "','" + idNumero + "','" + apellido + "','" + nombre + "');");
+            if (z == 1) {
+                System.out.println("Se agrego la persona de manera exitosa!");
+            } else {
+                System.out.println("Error");
+            }
+            // INSERTA DATOS DE HUESPED
+            z = s.executeUpdate(
+                    "INSERT INTO huesped (k_id_persona_tipo,k_id_persona_numero,n_direccion_residencia,n_ciudad_residencia,q_telefono,f_fecha_nacimiento,q_edad) VALUES ('"
+                    + idTipo + "','" + idNumero + "','" + direccion + "','" + ciudad + "','" + telefono + "','" + fNacimiento + "','" + edad + "');");
+            if (z == 1) {
+                System.out.println("Se agrego el huesped de manera exitosa!");
+            } else {
+                System.out.println("Error");
+            }
+            // INSERTA DATOS DE RESERVA
+            z = s.executeUpdate(
+                    "INSERT INTO huesped (k_id_reserva,i_estado,f_inicio,f_final,q_num_diask_id_persona_tipo,k_id_persona_numero) VALUES ('"
+                    + idReserva + "','" + estado + "','" + f_inicio + "','" + f_final + "','" + numDias + "','" + idTipo + "','" + idNumero + "');");
+            if (z == 1) {
+                System.out.println("Se agrego el huesped de manera exitosa!");
+            } else {
+            }
+        } catch (Exception e) {
+            System.out.println("Problema en inserta reserva");
+            e.printStackTrace();
+        }
+
+    }
+
 }
