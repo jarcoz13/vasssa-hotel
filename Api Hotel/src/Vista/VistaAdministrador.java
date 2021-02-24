@@ -60,31 +60,16 @@ public class VistaAdministrador extends javax.swing.JFrame {
         setUndecorated(true);
         setPreferredSize(new java.awt.Dimension(800, 600));
         setResizable(false);
-        getContentPane().setLayout(null);
 
         panelMenu.setOpaque(false);
         panelMenu.setPreferredSize(new java.awt.Dimension(250, 300));
         panelMenu.setLayout(new javax.swing.OverlayLayout(panelMenu));
-        getContentPane().add(panelMenu);
-        panelMenu.setBounds(550, 100, 250, 300);
 
         panelGeneral.setMaximumSize(new java.awt.Dimension(800, 500));
         panelGeneral.setMinimumSize(new java.awt.Dimension(800, 500));
+        panelGeneral.setOpaque(false);
         panelGeneral.setPreferredSize(new java.awt.Dimension(800, 500));
-
-        javax.swing.GroupLayout panelGeneralLayout = new javax.swing.GroupLayout(panelGeneral);
-        panelGeneral.setLayout(panelGeneralLayout);
-        panelGeneralLayout.setHorizontalGroup(
-            panelGeneralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 800, Short.MAX_VALUE)
-        );
-        panelGeneralLayout.setVerticalGroup(
-            panelGeneralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 500, Short.MAX_VALUE)
-        );
-
-        getContentPane().add(panelGeneral);
-        panelGeneral.setBounds(0, 100, 800, 500);
+        panelGeneral.setLayout(new javax.swing.OverlayLayout(panelGeneral));
 
         panelBarra.setBackground(new java.awt.Color(255, 255, 255));
         panelBarra.setMinimumSize(new java.awt.Dimension(800, 100));
@@ -150,6 +135,7 @@ public class VistaAdministrador extends javax.swing.JFrame {
                 .addComponent(iconoMenu)
                 .addGap(0, 0, 0)
                 .addComponent(botonReservas, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, 0)
                 .addComponent(botonHuespeds, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(botonEmpleados)
@@ -176,8 +162,24 @@ public class VistaAdministrador extends javax.swing.JFrame {
                 .addComponent(botonMenu))
         );
 
-        getContentPane().add(panelBarra);
-        panelBarra.setBounds(0, 0, 800, 100);
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(panelBarra, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(panelGeneral, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(550, 550, 550)
+                .addComponent(panelMenu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(panelBarra, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(panelGeneral, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(panelMenu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+        );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
