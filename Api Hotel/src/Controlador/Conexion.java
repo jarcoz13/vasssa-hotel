@@ -6,6 +6,8 @@ import javax.swing.table.DefaultTableModel;
 
 public class Conexion {
 
+    Connection connection;
+
     public void conectarBD(String host, String port, String database,
             String user, String password) {
         String url = "";
@@ -28,10 +30,30 @@ public class Conexion {
             System.out.println("Error al conectar con (" + url + "): " + sqle);
         }
     }
-<<<<<<< HEAD
-=======
 
     //METODO CONSULTAR RESERVA DISPONIBLE SIMP
+    public boolean ConsultarSesion(String f_inicio, String f_final) {
+
+        boolean existe = false;
+        ResultSet rs = null;
+        Statement s = null;
+        //La fecha esta dentro de una reserva hecha
+        try {
+            s = connection.createStatement();
+            rs = s.executeQuery("SELECT f_inicio,f_final FROM reserva WHERE f_inicio BETWEEN '" + f_inicio
+                    + "' AND '" + f_final + "' and f_final BETWEEN '" + f_inicio
+                    + "' AND '" + f_final + "';");
+            if (rs.next()) {
+                existe = true;
+            }
+
+        } catch (Exception e) {
+
+            System.out.println("Problema en consultaSesion");
+        }
+        return existe;
+    }
+
     //METODO CONSULTAR RESERVA DISPONIBLE COMP
     //METODO CONFIRMAR RESERVA
     public void InsertarReserva(int idReserva, int estado, Date f_inicio, Date f_final, int numDias,
@@ -70,80 +92,90 @@ public class Conexion {
             e.printStackTrace();
         }
     }
+
     //METODO MOSTRAR HABITACIONES
     public void printHabitaciones(JTable tabla) {
-		ResultSet rs = null;
-		Statement s = null;
+        ResultSet rs = null;
+        Statement s = null;
 
-		DefaultTableModel model = new DefaultTableModel();
+        DefaultTableModel model = new DefaultTableModel();
 
-		model.addColumn("Habitacion");// 1
-		model.addColumn("Tipo");// 2
-		model.addColumn("Camas");// 3
-		model.addColumn("Precio");// 4
-                model.addColumn("Descuento");// 5
+        model.addColumn("Habitacion");// 1
+        model.addColumn("Tipo");// 2
+        model.addColumn("Camas");// 3
+        model.addColumn("Precio");// 4
+        model.addColumn("Descuento");// 5
 
-		tabla.setModel(model);
+        tabla.setModel(model);
 
-		String[] datos = new String[5];
+        String[] datos = new String[5];
 
-		try {
+        try {
 
-			s = connection.createStatement();
-			rs = s.executeQuery("SELECT h.k_id_habitacion, ht.k_id_tipo_habitacion, h.q_num_camas, th.v_precio, th.v_descuento FROM habitacion h, habitacion_tipo ht, tipo_habitacion th WHERE h.k_id_habitacion=ht.k_id_habitacion AND ht.k_id_tipo_habitacion=th.k_id_tipo_habitacion;");
+            s = connection.createStatement();
+            rs = s.executeQuery("SELECT h.k_id_habitacion, ht.k_id_tipo_habitacion, h.q_num_camas, th.v_precio, th.v_descuento FROM habitacion h, habitacion_tipo ht, tipo_habitacion th WHERE h.k_id_habitacion=ht.k_id_habitacion AND ht.k_id_tipo_habitacion=th.k_id_tipo_habitacion;");
 
-			while (rs.next()) {
-				datos[0] = rs.getString(1);
-				datos[1] = rs.getString(2);
-				datos[2] = rs.getString(3);
-				datos[3] = rs.getString(4);
-				datos[4] = rs.getString(5);
-				model.addRow(datos);
-			}
+            while (rs.next()) {
+                datos[0] = rs.getString(1);
+                datos[1] = rs.getString(2);
+                datos[2] = rs.getString(3);
+                datos[3] = rs.getString(4);
+                datos[4] = rs.getString(5);
+                model.addRow(datos);
+            }
 
-		} catch (Exception e) {
+        } catch (Exception e) {
 
-			System.out.println("Error en tabla");
+            System.out.println("Error en tabla");
 
-		}
-	}
-        //METODO MOSTRAR HABITACIONES
+        }
+    }
+    //METODO MOSTRAR HABITACIONES
+
     public void printHabDisponibles(JTable tabla) {
-		ResultSet rs = null;
-		Statement s = null;
+        ResultSet rs = null;
+        Statement s = null;
 
-		DefaultTableModel model = new DefaultTableModel();
+        DefaultTableModel model = new DefaultTableModel();
 
-		model.addColumn("Habitacion");// 1
-		model.addColumn("Tipo");// 2
-		model.addColumn("Camas");// 3
-		model.addColumn("Precio");// 4
-                model.addColumn("Descuento");// 5
+        model.addColumn("Habitacion");// 1
+        model.addColumn("Tipo");// 2
+        model.addColumn("Camas");// 3
+        model.addColumn("Precio");// 4
+        model.addColumn("Descuento");// 5
 
-		tabla.setModel(model);
+        tabla.setModel(model);
 
-		String[] datos = new String[5];
+        String[] datos = new String[5];
 
-		try {
-			s = connection.createStatement();
-                        //Modificar para que muestre los registros que NO ESTEN EN reserva_habitacion
-			rs = s.executeQuery("SELECT h.k_id_habitacion, ht.k_id_tipo_habitacion, h.q_num_camas, th.v_precio, th.v_descuento FROM habitacion h, habitacion_tipo ht, tipo_habitacion th WHERE h.k_id_habitacion=ht.k_id_habitacion AND ht.k_id_tipo_habitacion=th.k_id_tipo_habitacion;");
+        try {
+            s = connection.createStatement();
+            //Modificar para que muestre los registros que NO ESTEN EN reserva_habitacion
+            rs = s.executeQuery("SELECT h.k_id_habitacion, ht.k_id_tipo_habitacion, h.q_num_camas, th.v_precio\n"
+                    + "            , th.v_descuento FROM habitacion h, habitacion_tipo ht\n"
+                    + "            , tipo_habitacion th\n"
+                    + "            LEFT JOIN reserva_habitacion rh ON h\n"
+                    + "            .k_id_habitacion = rh.k_id_habitacion\n"
+                    + "            WHERE h\n"
+                    + "            .k_id_habitacion = ht.k_id_habitacion AND ht\n"
+                    + "            .k_id_tipo_habitacion = th.k_id_tipo_habitacion AND rh\n"
+                    + "            .k_id_habitacion IS NULL;");
 
-			while (rs.next()) {
-				datos[0] = rs.getString(1);
-				datos[1] = rs.getString(2);
-				datos[2] = rs.getString(3);
-				datos[3] = rs.getString(4);
-				datos[4] = rs.getString(5);
-				model.addRow(datos);
-			}
+            while (rs.next()) {
+                datos[0] = rs.getString(1);
+                datos[1] = rs.getString(2);
+                datos[2] = rs.getString(3);
+                datos[3] = rs.getString(4);
+                datos[4] = rs.getString(5);
+                model.addRow(datos);
+            }
 
-		} catch (Exception e) {
+        } catch (Exception e) {
 
-			System.out.println("Error en tabla");
+            System.out.println("Error en tabla");
 
-		}
-	}
+        }
+    }
 
     //METODO RESERVAR HABITACIONES DISPONIBLES
     public void InsertarRegistro(int idReserva, int idHabitacion) {
@@ -152,7 +184,7 @@ public class Conexion {
             s = connection.createStatement();
             // INSERTA LOS DATOS
             int z = s.executeUpdate(
-                    "INSERT INTO reserva_habitacion (k_id_reserva,k_id_habitacion) VALUES ('"+ idReserva + "','" + idHabitacion+ "');");
+                    "INSERT INTO reserva_habitacion (k_id_reserva,k_id_habitacion) VALUES ('" + idReserva + "','" + idHabitacion + "');");
             if (z == 1) {
                 System.out.println("Se agrego la reserva de manera exitosa!");
             } else {
@@ -164,5 +196,4 @@ public class Conexion {
         }
 
     }
->>>>>>> bac33c2508b6ffcb6aba84cbe349a75afa063845
 }

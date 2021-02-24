@@ -42,7 +42,16 @@ public final class Control implements ActionListener {
         return true;
     }
 
-    public boolean insertarReserva(int id, String nombre, String apellido, int telefono, String direccion, String ciudad, Date fechaNacimiento,
+    public boolean queryIdReserva(int llave) {
+        //IMPLEMENTAR 
+        if (llave == 1) { // Si reserva con id llave existe
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public boolean insertarReserva(int id, String nombre, String apellido, String telefono, String direccion, String ciudad, Date fechaNacimiento,
             Date fechaInicial, Date fechaFinal, int habitacionesSencillas, int habitacionesDobles, int numPersonas) {
         //IMPLEMENTAR
         return true;
@@ -59,16 +68,24 @@ public final class Control implements ActionListener {
         String nombreCompleto[] = ventana.getVistaFormulario().getCampoNombre().getText().split(" ");
         String nombre = nombreCompleto[0];
         String apellido = nombreCompleto[1];
-        int telefono = Integer.parseInt(ventana.getVistaFormulario().getCampoTelefono().getText());
+        String telefono = ventana.getVistaFormulario().getCampoTelefono().getText();
         String direccionCompleta[] = ventana.getVistaFormulario().getCampoDireccionCompleta().getText().split(",");
         String direccion = direccionCompleta[0];
         String ciudad = direccionCompleta[1];
         String fechaN = ventana.getVistaFormulario().getFechaNacimiento().getFormattedTextField().getText();
         Date fechaNacimiento = convertirStringAFecha(fechaN);
-        int idReserva = 0;
+        int idReserva = generarNumReserva();
+        while (queryIdReserva(idReserva) == true) {
+            idReserva = generarNumReserva();
+        }
         insertarReserva(idReserva, nombre, apellido, telefono, direccion, ciudad, fechaNacimiento, fechaInicial, fechaFinal, habitacionesSencillas,
                 habitacionesDobles, numPersonas);
         return true;
+    }
+
+    public int generarNumReserva() {
+        int id = (int) (Math.random() * (10000 - 1000 + 1) + 1000);
+        return id;
     }
 
     public void llenarFormulario() {
@@ -109,7 +126,7 @@ public final class Control implements ActionListener {
         try {
             fecha = new SimpleDateFormat("dd/MM/yyyy").parse(texto);
         } catch (ParseException ex) {
-            System.out.println("Ocurrió un error Inesperado");
+            ventana.mostrarErrorFatal();
         }
         return fecha;
     }
@@ -216,7 +233,7 @@ public final class Control implements ActionListener {
             if (confirmarReserva()) {
                 //limpiarFormulario();
             } else {
-                System.out.println("La reserva Falló");
+                ventana.mostrarErrorFatal();
             }
         }
         if (evento.equals(ventana.getVistaFormulario().getBotonConsultar())) { //Consultar reserva completa

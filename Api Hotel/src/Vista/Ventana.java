@@ -43,6 +43,10 @@ public final class Ventana extends javax.swing.JFrame {
     public void mostrarErrorDatosIngresados() {
         JOptionPane.showMessageDialog(null, "Revise que los datos que ingresó sean válidos", "Error", JOptionPane.WARNING_MESSAGE);
     }
+    
+    public void mostrarErrorFatal(){
+        JOptionPane.showMessageDialog(null, "Ocurrió un error inesperado, por favor vuelva a intentarlo", "Error", JOptionPane.WARNING_MESSAGE);
+    }
 
     public void mostrarVistaHome() {
         panelPrincipal.add(vistaHome);
