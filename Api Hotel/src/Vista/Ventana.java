@@ -11,6 +11,7 @@ public final class Ventana extends javax.swing.JFrame {
     private VistaUbicacion vistaUbicacion;
     private VistaContacto vistaContacto;
     private VistaFormulario vistaFormulario;
+    private VistaRecibo vistaRecibo;
 
     public Ventana() { //Constructor
         initComponents();
@@ -30,21 +31,27 @@ public final class Ventana extends javax.swing.JFrame {
         vistaUbicacion = new VistaUbicacion();
         vistaContacto = new VistaContacto();
         vistaFormulario = new VistaFormulario();
+        vistaRecibo = new VistaRecibo();
     }
 
     public void mostrarVistaFormularioReserva() {
         vistaFormulario.setVisible(true);
     }
-    
-    public void ocultarVistaFormulario(){
+
+    public void ocultarVistaFormulario() {
         vistaFormulario.dispose();
+    }
+
+    public void mostrarVistaRecibo () {
+        JOptionPane.showMessageDialog(null, vistaRecibo, "Reserva Realizada", JOptionPane.PLAIN_MESSAGE);
+        vistaRecibo = null;
     }
 
     public void mostrarErrorDatosIngresados() {
         JOptionPane.showMessageDialog(null, "Revise que los datos que ingresó sean válidos", "Error", JOptionPane.WARNING_MESSAGE);
     }
-    
-    public void mostrarErrorFatal(){
+
+    public void mostrarErrorFatal() {
         JOptionPane.showMessageDialog(null, "Ocurrió un error inesperado, por favor vuelva a intentarlo", "Error", JOptionPane.WARNING_MESSAGE);
     }
 
@@ -91,6 +98,10 @@ public final class Ventana extends javax.swing.JFrame {
     public VistaHome getVistaHome() {
         return vistaHome;
     }
+    
+    public VistaRecibo getVistaRecibo(){
+        return vistaRecibo;
+    }
 
     public VistaFormulario getVistaFormulario() {
         return vistaFormulario;
@@ -131,9 +142,7 @@ public final class Ventana extends javax.swing.JFrame {
     public JButton getBotonMenu() {
         return botonMenu;
     }
-    
-    
-    
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {

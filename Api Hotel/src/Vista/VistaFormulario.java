@@ -168,7 +168,7 @@ public class VistaFormulario extends javax.swing.JFrame {
 
         jLabel3.setFont(new java.awt.Font("Nirmala UI", 0, 11)); // NOI18N
         jLabel3.setText("Hasta");
-        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 100, 28, -1));
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 100, 28, -1));
 
         jLabel1.setFont(new java.awt.Font("MV Boli", 0, 24)); // NOI18N
         jLabel1.setText("Asigna tu Reserva");
@@ -177,7 +177,7 @@ public class VistaFormulario extends javax.swing.JFrame {
         jLabel2.setFont(new java.awt.Font("Nirmala UI", 0, 11)); // NOI18N
         jLabel2.setText("Desde");
         jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 100, -1, -1));
-        jPanel1.add(fechaFinal, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 100, 80, -1));
+        jPanel1.add(fechaFinal, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 100, 90, -1));
         jPanel1.add(fechaInicial, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 100, 90, -1));
 
         jLabel4.setFont(new java.awt.Font("Nirmala UI", 0, 11)); // NOI18N
@@ -263,7 +263,7 @@ public class VistaFormulario extends javax.swing.JFrame {
                 botonLimpiarActionPerformed(evt);
             }
         });
-        jPanel1.add(botonLimpiar, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 300, 80, -1));
+        jPanel1.add(botonLimpiar, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 300, 90, -1));
 
         botonConfirmarReserva.setFont(new java.awt.Font("Nirmala UI", 0, 11)); // NOI18N
         botonConfirmarReserva.setText("Confirmar Reserva");
@@ -282,7 +282,7 @@ public class VistaFormulario extends javax.swing.JFrame {
                 botonConsultarActionPerformed(evt);
             }
         });
-        jPanel1.add(botonConsultar, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 270, 80, -1));
+        jPanel1.add(botonConsultar, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 270, 90, -1));
 
         comboTipoId.setFont(new java.awt.Font("Nirmala UI", 0, 11)); // NOI18N
         comboTipoId.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Cedula de ciudadania", "Pasaporte", "Cedula de extranjeria" }));

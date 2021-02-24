@@ -51,9 +51,11 @@ public final class Control implements ActionListener {
         }
     }
 
-    public boolean insertarReserva(int id, String nombre, String apellido, String telefono, String direccion, String ciudad, Date fechaNacimiento,
+    public boolean insertarReserva(int id, String nombre, String apellido, int numDoc, String tipoDoc, String telefono, String direccion, String ciudad, Date fechaNacimiento,
             Date fechaInicial, Date fechaFinal, int habitacionesSencillas, int habitacionesDobles, int numPersonas) {
         //IMPLEMENTAR
+
+        ///
         return true;
     }
 
@@ -73,14 +75,41 @@ public final class Control implements ActionListener {
         String direccion = direccionCompleta[0];
         String ciudad = direccionCompleta[1];
         String fechaN = ventana.getVistaFormulario().getFechaNacimiento().getFormattedTextField().getText();
+        int numDoc = Integer.parseInt(ventana.getVistaFormulario().getCampoNumId().getText());
+        String tipoDoc = (String) ventana.getVistaFormulario().getComboTipoId().getSelectedItem();
         Date fechaNacimiento = convertirStringAFecha(fechaN);
         int idReserva = generarNumReserva();
         while (queryIdReserva(idReserva) == true) {
             idReserva = generarNumReserva();
         }
-        insertarReserva(idReserva, nombre, apellido, telefono, direccion, ciudad, fechaNacimiento, fechaInicial, fechaFinal, habitacionesSencillas,
-                habitacionesDobles, numPersonas);
-        return true;
+        if (insertarReserva(idReserva, nombre, apellido, numDoc, tipoDoc, telefono, direccion, ciudad, fechaNacimiento,
+                fechaInicial, fechaFinal, habitacionesSencillas, habitacionesDobles, numPersonas)) {
+            imprimirRecibo(idReserva, nombre, apellido, numDoc, tipoDoc, telefono, direccion, ciudad, fechaN, fechaI, fechaF,
+                    habitacionesSencillas, habitacionesDobles, numPersonas);
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public void imprimirRecibo(int idRes, String nombre, String apell, int numDoc, String tipoDoc, String telefono, String dir,
+            String ciud, String fechaN, String fechaI, String fechaF, int habCen, int habDob, int numPer) {
+
+        String nombreCompleto = nombre + " " + apell;
+        ventana.getVistaRecibo().getNumReserva().setText("" + idRes);
+        ventana.getVistaRecibo().getNombre().setText(nombreCompleto);
+        ventana.getVistaRecibo().getTipoDoc().setText(tipoDoc);
+        ventana.getVistaRecibo().getNumDoc().setText("" + numDoc);
+        ventana.getVistaRecibo().getTelefono().setText(telefono);
+        ventana.getVistaRecibo().getDireccion().setText(dir);
+        ventana.getVistaRecibo().getCiudad().setText(ciud);
+        ventana.getVistaRecibo().getFechaNacimiento().setText(fechaN);
+        ventana.getVistaRecibo().getFechaInicial().setText(fechaI);
+        ventana.getVistaRecibo().getFechaFinal().setText(fechaF);
+        ventana.getVistaRecibo().getNumHabDobles().setText("" + habDob);
+        ventana.getVistaRecibo().getNumHabSencillas().setText("" + habCen);
+        ventana.getVistaRecibo().getNumPersonas().setText("" + numPer);
+        ventana.mostrarVistaRecibo();
     }
 
     public int generarNumReserva() {
@@ -126,7 +155,6 @@ public final class Control implements ActionListener {
         try {
             fecha = new SimpleDateFormat("dd/MM/yyyy").parse(texto);
         } catch (ParseException ex) {
-            ventana.mostrarErrorFatal();
         }
         return fecha;
     }
@@ -193,6 +221,16 @@ public final class Control implements ActionListener {
         }
     }
 
+    public void enviarReserva() {
+        if (confirmarReserva()) {
+            limpiarFormulario();
+            ventana.apagarVistas();
+            ventana.mostrarVistaReservas();
+        } else {
+            System.out.println("Fallo al insertar la reserva");
+        }
+    }
+
     @Override
     public void actionPerformed(ActionEvent e) {
         Object evento = e.getSource();
@@ -229,11 +267,16 @@ public final class Control implements ActionListener {
         if (evento.equals(ventana.getVistaFormulario().getBotonLimpiar())) {//Limpiar formulario
             limpiarFormulario();
         }
-        if (evento.equals(ventana.getVistaFormulario().getBotonConfirmarReserva())) {//ConfirmarReserva
-            if (confirmarReserva()) {
-                //limpiarFormulario();
-            } else {
-                ventana.mostrarErrorFatal();
+        if (evento.equals(ventana.getVistaFormulario().getBotonConfirmarReserva())) {//ConfirmarReserva           
+            boolean fallo = false;
+            try {
+                enviarReserva();
+            } catch (Exception excepcion) {
+                fallo = true;
+            }
+            if (fallo) {
+                ventana.mostrarErrorDatosIngresados();
+                ventana.mostrarVistaFormularioReserva();
             }
         }
         if (evento.equals(ventana.getVistaFormulario().getBotonConsultar())) { //Consultar reserva completa
