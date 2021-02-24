@@ -33,7 +33,7 @@ public class Conexion {
     }
 
     //METODO CONSULTAR RESERVA DISPONIBLE SIMP
-    public boolean ConsultarReserva(String f_inicial, String f_final) {
+    public boolean ConsultarReserva(Date f_inicial, Date f_final) {
 
         boolean existe = false;
         ResultSet rs = null;
@@ -55,7 +55,7 @@ public class Conexion {
     }
 
     //METODO CONSULTAR RESERVA DISPONIBLE COMP
-    public boolean ConsultarReservaComp(String f_inicial, String f_final, int habSencilla, int habDoble, int numPersonas) {
+    public boolean ConsultarReservaComp(Date f_inicial, Date f_final, int habSencilla, int habDoble, int numPersonas) {
 
         boolean disp = false;
         boolean existe = false;
@@ -165,7 +165,7 @@ public class Conexion {
 
         try {
             s = connection.createStatement();
-            s.executeUpdate("");
+            s.executeUpdate("update reserva set i_estado="+estado+" from reserva r JOIN huesped h ON h.k_id_persona_tipo=r.k_id_persona_tipo where r.f_inicio= '"+fecha+"' AND h.q_telefono = '"+numero+"'");
         } catch (Exception e) {
 
             System.out.println("Problema en Reserva");

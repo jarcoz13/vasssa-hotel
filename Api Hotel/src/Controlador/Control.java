@@ -10,6 +10,7 @@ import java.util.Date;
 public final class Control implements ActionListener {
 
     private final Ventana ventana;
+    Conexion con= new Conexion();
 
     public Control(Ventana ventana) {
         this.ventana = ventana;
@@ -33,8 +34,10 @@ public final class Control implements ActionListener {
     }
 
     public boolean queryReserva(Date fechaInicial, Date fechaFinal, int habitaciones, int numPersonas) {
-        //IMPLEMENTAR
-        return true;
+        boolean disponible = false;
+        disponible=con.ConsultarReserva(fechaInicial, fechaFinal);
+        
+        return disponible;
     }
 
     public boolean queryReserva(Date fechaInicial, Date fechaFinal, int habitacionesSencillas, int habitacionesDobles, int numPersonas) {
