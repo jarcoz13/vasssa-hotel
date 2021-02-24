@@ -55,23 +55,55 @@ public class Conexion {
     }
 
     //METODO CONSULTAR RESERVA DISPONIBLE COMP
-    public boolean ConsultarReservaComp (String f_inicial, String f_final,int habSencilla, int habDoble, int numPersonas) {
+    public boolean ConsultarReservaComp(String f_inicial, String f_final, int habSencilla, int habDoble, int numPersonas) {
 
+        boolean disp = false;
         boolean existe = false;
+
         ResultSet rs = null;
         Statement s = null;
+        String datos = "";
+        int hs = 0;
+        int hd = 0;
         try {
             s = connection.createStatement();
             rs = s.executeQuery("SELECT f_inicio,f_final FROM reserva WHERE f_inicial BETWEEN '" + f_inicial
                     + "' AND '" + f_final + "' AND f_final BETWEEN '" + f_inicial
                     + "' AND '" + f_final + "';");
             if (rs.next()) {
-                existe = true;
+                disp = true;
             }
 
         } catch (Exception e) {
 
             System.out.println("Problema en consultaSesion");
+        }
+        try {
+            s = connection.createStatement();
+            rs = s.executeQuery("SELECT count(th.k_id_tipo_habitacion) FROM habitacion h JOIN habitacion_tipo ht ON h.k_id_habitacion=ht.k_id_habitacion JOIN tipo_habitacion th ON ht.k_id_tipo_habitacion=th.k_id_tipo_habitacion LEFT JOIN reserva_habitacion rh ON h.k_id_habitacion=rh.k_id_habitacion WHERE rh.k_id_habitacion IS NULL AND th.k_id_tipo_habitacion = 1");
+            while (rs.next()) {
+                datos = rs.getString(1);
+            }
+
+        } catch (Exception e) {
+            System.out.println("Error en tabla r");
+        }
+        hs = Integer.parseInt(datos);
+        try {
+            s = connection.createStatement();
+            rs = s.executeQuery("SELECT count(th.k_id_tipo_habitacion) FROM habitacion h JOIN habitacion_tipo ht ON h.k_id_habitacion=ht.k_id_habitacion JOIN tipo_habitacion th ON ht.k_id_tipo_habitacion=th.k_id_tipo_habitacion LEFT JOIN reserva_habitacion rh ON h.k_id_habitacion=rh.k_id_habitacion WHERE rh.k_id_habitacion IS NULL AND th.k_id_tipo_habitacion = 2");
+            while (rs.next()) {
+                datos = rs.getString(1);
+            }
+
+        } catch (Exception e) {
+            System.out.println("Error en tabla r");
+        }
+        hd = Integer.parseInt(datos);
+        if(habSencilla<=hs & habDoble<=hd & disp==true){
+            existe=false;
+        }else{
+            existe=true;
         }
         return existe;
     }
