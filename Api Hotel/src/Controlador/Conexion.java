@@ -100,10 +100,10 @@ public class Conexion {
             System.out.println("Error en tabla r");
         }
         hd = Integer.parseInt(datos);
-        if(habSencilla<=hs & habDoble<=hd & disp==true){
-            existe=false;
-        }else{
-            existe=true;
+        if (habSencilla <= hs & habDoble <= hd & disp == true) {
+            existe = false;
+        } else {
+            existe = true;
         }
         return existe;
     }
@@ -143,6 +143,32 @@ public class Conexion {
         } catch (Exception e) {
             System.out.println("Problema en insertar reserva");
             e.printStackTrace();
+        }
+    }
+
+    //MODIFICAR ESTADO DE UNA RESERVA POR NOMBRE
+    public void modResNom(String nombre) {
+        Statement s = null;
+
+        try {
+            s = connection.createStatement();
+            s.executeUpdate("");
+        } catch (Exception e) {
+
+            System.out.println("Problema en Reserva");
+        }
+    }
+    
+    //MODIFICAR ESTADO DE UNA RESERVA POR NUMERO Y FECHA
+    public void modResNumFecha(String numero, Date fecha) {
+        Statement s = null;
+
+        try {
+            s = connection.createStatement();
+            s.executeUpdate("");
+        } catch (Exception e) {
+
+            System.out.println("Problema en Reserva");
         }
     }
 
@@ -220,6 +246,46 @@ public class Conexion {
             System.out.println("Error en tabla");
 
         }
+    }
+
+    //METODO CONSULTAR PRECIO DE UNA HABITACION
+    public int getPrecio(int tipo) {
+
+        ResultSet rs = null;
+        Statement s = null;
+        String string = null;
+        int n;
+        try {
+            s = connection.createStatement();
+            rs = s.executeQuery("SELECT th.v_precio FROM habitacion h JOIN habitacion_tipo ht ON h.k_id_habitacion=ht.k_id_habitacion JOIN tipo_habitacion th ON ht.k_id_tipo_habitacion=th.k_id_tipo_habitacion WHERE th.k_id_tipo_habitacion = " + tipo + " LIMIT 1");
+            while (rs.next()) {
+                string = rs.getString(1);
+            }
+        } catch (Exception e) {
+            System.out.println("uh");
+        }
+        n = Integer.parseInt(string);
+        return n;
+    }
+
+    //METODO CONSULTAR PRECIO DE UNA HABITACION
+    public int getDescuento(int tipo) {
+
+        ResultSet rs = null;
+        Statement s = null;
+        String string = null;
+        int n;
+        try {
+            s = connection.createStatement();
+            rs = s.executeQuery("SELECT th.v_descuento FROM habitacion h JOIN habitacion_tipo ht ON h.k_id_habitacion=ht.k_id_habitacion JOIN tipo_habitacion th ON ht.k_id_tipo_habitacion=th.k_id_tipo_habitacion WHERE th.k_id_tipo_habitacion = " + tipo + " LIMIT 1");
+            while (rs.next()) {
+                string = rs.getString(1);
+            }
+        } catch (Exception e) {
+            System.out.println("uh");
+        }
+        n = Integer.parseInt(string);
+        return n;
     }
 
     //METODO RESERVAR HABITACIONES DISPONIBLES
