@@ -33,10 +33,52 @@ public class Conexion {
     }
 
     //METODO CONSULTAR RESERVA DISPONIBLE SIMP
+    public boolean ConsultarReserva(String f_inicial, String f_final) {
+
+        boolean existe = false;
+        ResultSet rs = null;
+        Statement s = null;
+        try {
+            s = connection.createStatement();
+            rs = s.executeQuery("SELECT f_inicio,f_final FROM reserva WHERE f_inicial BETWEEN '" + f_inicial
+                    + "' AND '" + f_final + "' AND f_final BETWEEN '" + f_inicial
+                    + "' AND '" + f_final + "';");
+            if (rs.next()) {
+                existe = true;
+            }
+
+        } catch (Exception e) {
+
+            System.out.println("Problema en consultaSesion");
+        }
+        return existe;
+    }
+
     //METODO CONSULTAR RESERVA DISPONIBLE COMP
+    public boolean ConsultarReservaComp (String f_inicial, String f_final,int habSencilla, int habDoble, int numPersonas) {
+
+        boolean existe = false;
+        ResultSet rs = null;
+        Statement s = null;
+        try {
+            s = connection.createStatement();
+            rs = s.executeQuery("SELECT f_inicio,f_final FROM reserva WHERE f_inicial BETWEEN '" + f_inicial
+                    + "' AND '" + f_final + "' AND f_final BETWEEN '" + f_inicial
+                    + "' AND '" + f_final + "';");
+            if (rs.next()) {
+                existe = true;
+            }
+
+        } catch (Exception e) {
+
+            System.out.println("Problema en consultaSesion");
+        }
+        return existe;
+    }
+
     //METODO CONFIRMAR RESERVA
     public void InsertarReserva(int idReserva, int estado, Date f_inicio, Date f_final, int numDias,
-            int idTipo, int idNumero, String apellido, String nombre, String direccion, String ciudad, int telefono, Date fNacimiento, int edad) {
+            int idTipo, int idNumero, String apellido, String nombre, String direccion, String ciudad, String telefono, Date fNacimiento, int edad) {
         Statement s = null;
         try {
             s = connection.createStatement();
@@ -130,7 +172,7 @@ public class Conexion {
         try {
             s = connection.createStatement();
             //Modificar para que muestre los registros que NO ESTEN EN reserva_habitacion
-            rs = s.executeQuery("SELECT h.k_id_habitacion, ht.k_id_tipo_habitacion, h.q_num_camas, th.v_precio, th.v_descuento FROM habitacion h, habitacion_tipo ht, tipo_habitacion th WHERE h.k_id_habitacion=ht.k_id_habitacion AND ht.k_id_tipo_habitacion=th.k_id_tipo_habitacion;");
+            rs = s.executeQuery("SELECT h.k_id_habitacion, ht.k_id_tipo_habitacion, h.q_num_camas, th.v_precio, th.v_descuento FROM habitacion h, habitacion_tipo ht, tipo_habitacion th LEFT JOIN reserva_habitacion rh ON h.k_id_habitacion=rh.k_id_habitacion WHERE h.k_id_habitacion=ht.k_id_habitacion AND ht.k_id_tipo_habitacion=th.k_id_tipo_habitacion AND rh.k_id_habitacion IS NULL;");
 
             while (rs.next()) {
                 datos[0] = rs.getString(1);
