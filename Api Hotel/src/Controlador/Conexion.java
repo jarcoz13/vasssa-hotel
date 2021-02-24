@@ -1,18 +1,11 @@
 package Controlador;
 
-/**
- *
- * @author User
- */
 import java.sql.*;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
 public class Conexion {
 
-    Connection connection;
-
-    //CONEXION 
     public void conectarBD(String host, String port, String database,
             String user, String password) {
         String url = "";
@@ -23,7 +16,7 @@ public class Conexion {
             } catch (ClassNotFoundException ex) {
                 System.out.println("Error al registrar el driver de PostgreSQL: " + ex);
             }
-            connection = null;
+            Connection connection = null;
             url = "jdbc:postgresql://" + host + ":" + port + "/" + database;
             // Coneccion
             connection = DriverManager.getConnection(
@@ -35,6 +28,8 @@ public class Conexion {
             System.out.println("Error al conectar con (" + url + "): " + sqle);
         }
     }
+<<<<<<< HEAD
+=======
 
     //METODO CONSULTAR RESERVA DISPONIBLE SIMP
     public boolean ConsultarSesion(String f_inicio, String f_final) {
@@ -194,4 +189,5 @@ public class Conexion {
         }
 
     }
+>>>>>>> bac33c2508b6ffcb6aba84cbe349a75afa063845
 }

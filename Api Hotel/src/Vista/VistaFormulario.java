@@ -16,6 +16,7 @@ public class VistaFormulario extends javax.swing.JFrame {
         this.setResizable(false);
         this.fondoTranslucido.setBackground(new Color(255, 255, 255, 95));
         this.setDefaultCloseOperation(this.DISPOSE_ON_CLOSE);
+        this.pack();
     }
 
     public JButton getBotonAgregar() {
@@ -43,7 +44,7 @@ public class VistaFormulario extends javax.swing.JFrame {
     }
 
     public JComboBox<String> getComboTipoHab() {
-        return comboTipo;
+        return comboTipoHab;
     }
 
     public JDatePicker getFechaFinal() {
@@ -62,10 +63,6 @@ public class VistaFormulario extends javax.swing.JFrame {
         return numHabSencillasReservadas;
     }
 
-    public JTextField getNumId() {
-        return numId;
-    }
-
     public JLabel getNumPersonasReservadas() {
         return numPersonasReservadas;
     }
@@ -80,6 +77,26 @@ public class VistaFormulario extends javax.swing.JFrame {
 
     public JLabel getValorDescuentos() {
         return valorDescuentos;
+    }
+
+    public JTextField getCampoDireccionCompleta() {
+        return campoDireccionCompleta;
+    }
+
+    public JDatePicker getFechaNacimiento() {
+        return fechaNacimiento;
+    }
+
+    public JTextField getCampoNombre() {
+        return campoNombre;
+    }
+
+    public JTextField getCampoNumId() {
+        return campoNumId;
+    }
+
+    public JTextField getCampoTelefono() {
+        return campoTelefono;
     }
 
     /**
@@ -101,7 +118,7 @@ public class VistaFormulario extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         comboPersonas = new javax.swing.JComboBox<>();
         jLabel5 = new javax.swing.JLabel();
-        comboTipo = new javax.swing.JComboBox<>();
+        comboTipoHab = new javax.swing.JComboBox<>();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         botonAgregar = new javax.swing.JButton();
@@ -114,6 +131,7 @@ public class VistaFormulario extends javax.swing.JFrame {
         numPersonasReservadas = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
         jLabel15 = new javax.swing.JLabel();
+        jLabel16 = new javax.swing.JLabel();
         valorAproximado = new javax.swing.JLabel();
         valorDescuentos = new javax.swing.JLabel();
         botonLimpiar = new javax.swing.JButton();
@@ -122,25 +140,31 @@ public class VistaFormulario extends javax.swing.JFrame {
         comboTipoId = new javax.swing.JComboBox<>();
         jLabel9 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
-        numId = new javax.swing.JTextField();
+        campoNumId = new javax.swing.JTextField();
+        campoNombre = new javax.swing.JTextField();
+        campoTelefono = new javax.swing.JTextField();
+        campoDireccionCompleta = new javax.swing.JTextField();
+        fechaNacimiento = new org.jdatepicker.JDatePicker();
+        jLabel17 = new javax.swing.JLabel();
+        jLabel19 = new javax.swing.JLabel();
+        jLabel18 = new javax.swing.JLabel();
         fondoTranslucido = new javax.swing.JLabel();
         fondoFormulario = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        setResizable(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel1.setBackground(new java.awt.Color(255, 102, 102));
         jPanel1.setFont(new java.awt.Font("Nirmala UI", 0, 11)); // NOI18N
-        jPanel1.setMaximumSize(new java.awt.Dimension(380, 610));
-        jPanel1.setMinimumSize(new java.awt.Dimension(380, 610));
-        jPanel1.setPreferredSize(new java.awt.Dimension(360, 610));
+        jPanel1.setMaximumSize(new java.awt.Dimension(380, 650));
+        jPanel1.setMinimumSize(new java.awt.Dimension(380, 650));
+        jPanel1.setPreferredSize(new java.awt.Dimension(380, 650));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         comboHabitaciones.setFont(new java.awt.Font("Nirmala UI", 0, 11)); // NOI18N
         comboHabitaciones.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2", "3", "4", "5", "6" }));
-        jPanel1.add(comboHabitaciones, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 150, -1, -1));
+        jPanel1.add(comboHabitaciones, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 140, -1, -1));
 
         jLabel3.setFont(new java.awt.Font("Nirmala UI", 0, 11)); // NOI18N
         jLabel3.setText("Hasta");
@@ -158,75 +182,79 @@ public class VistaFormulario extends javax.swing.JFrame {
 
         jLabel4.setFont(new java.awt.Font("Nirmala UI", 0, 11)); // NOI18N
         jLabel4.setText("Reservar");
-        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 150, 44, -1));
+        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 140, 44, -1));
 
         comboPersonas.setFont(new java.awt.Font("Nirmala UI", 0, 11)); // NOI18N
         comboPersonas.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2", "3", "4" }));
-        jPanel1.add(comboPersonas, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 190, -1, -1));
+        jPanel1.add(comboPersonas, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 170, -1, -1));
 
         jLabel5.setFont(new java.awt.Font("Nirmala UI", 0, 11)); // NOI18N
         jLabel5.setText("habitaciones");
-        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 150, -1, -1));
+        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 140, -1, -1));
 
-        comboTipo.setFont(new java.awt.Font("Nirmala UI", 0, 11)); // NOI18N
-        comboTipo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Sencilla", "Doble" }));
-        jPanel1.add(comboTipo, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 150, 71, -1));
+        comboTipoHab.setFont(new java.awt.Font("Nirmala UI", 0, 11)); // NOI18N
+        comboTipoHab.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Sencilla", "Doble" }));
+        jPanel1.add(comboTipoHab, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 140, 71, -1));
 
         jLabel6.setFont(new java.awt.Font("Nirmala UI", 0, 11)); // NOI18N
         jLabel6.setText("Para");
-        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 190, -1, -1));
+        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 170, -1, -1));
 
         jLabel7.setFont(new java.awt.Font("Nirmala UI", 0, 11)); // NOI18N
         jLabel7.setText("personas");
-        jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 190, -1, -1));
+        jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 170, -1, -1));
 
         botonAgregar.setFont(new java.awt.Font("Nirmala UI", 0, 11)); // NOI18N
         botonAgregar.setText("Agregar a la reserva");
-        jPanel1.add(botonAgregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 230, 131, -1));
+        jPanel1.add(botonAgregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 210, 131, -1));
 
         jLabel8.setFont(new java.awt.Font("Nirmala UI", 0, 11)); // NOI18N
         jLabel8.setText("Tu Reserva");
-        jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 280, -1, -1));
+        jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 250, -1, -1));
 
         numHabSencillasReservadas.setFont(new java.awt.Font("Nirmala UI", 0, 11)); // NOI18N
         numHabSencillasReservadas.setText("0");
-        jPanel1.add(numHabSencillasReservadas, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 320, 20, -1));
+        jPanel1.add(numHabSencillasReservadas, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 270, 20, -1));
 
         jLabel10.setFont(new java.awt.Font("Nirmala UI", 0, 11)); // NOI18N
         jLabel10.setText("Habitaciones Sencillas");
-        jPanel1.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 320, 104, -1));
+        jPanel1.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 270, 120, -1));
 
         jLabel11.setFont(new java.awt.Font("Nirmala UI", 0, 11)); // NOI18N
         jLabel11.setText("Habitaciones Dobles");
-        jPanel1.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 340, 110, -1));
+        jPanel1.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 290, 110, -1));
 
         jLabel12.setFont(new java.awt.Font("Nirmala UI", 0, 11)); // NOI18N
         jLabel12.setText("Personas");
-        jPanel1.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 360, -1, -1));
+        jPanel1.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 310, -1, -1));
 
         numHabDoblesReservadas.setFont(new java.awt.Font("Nirmala UI", 0, 11)); // NOI18N
         numHabDoblesReservadas.setText("0");
-        jPanel1.add(numHabDoblesReservadas, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 340, 20, -1));
+        jPanel1.add(numHabDoblesReservadas, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 290, 20, -1));
 
         numPersonasReservadas.setFont(new java.awt.Font("Nirmala UI", 0, 11)); // NOI18N
         numPersonasReservadas.setText("0");
-        jPanel1.add(numPersonasReservadas, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 360, 20, -1));
+        jPanel1.add(numPersonasReservadas, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 310, 20, -1));
 
         jLabel14.setFont(new java.awt.Font("Nirmala UI", 0, 11)); // NOI18N
-        jLabel14.setText("Valor Aproximado:");
-        jPanel1.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 440, 90, -1));
+        jLabel14.setText("A nombre de");
+        jPanel1.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 401, 90, -1));
 
         jLabel15.setFont(new java.awt.Font("Nirmala UI", 0, 11)); // NOI18N
         jLabel15.setText("Total Descuentos:");
-        jPanel1.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 460, 90, -1));
+        jPanel1.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 340, 90, -1));
+
+        jLabel16.setFont(new java.awt.Font("Nirmala UI", 0, 11)); // NOI18N
+        jLabel16.setText("Valor Aproximado:");
+        jPanel1.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 360, 90, -1));
 
         valorAproximado.setFont(new java.awt.Font("Nirmala UI", 0, 11)); // NOI18N
         valorAproximado.setText("$0");
-        jPanel1.add(valorAproximado, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 440, 110, -1));
+        jPanel1.add(valorAproximado, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 360, 110, -1));
 
         valorDescuentos.setFont(new java.awt.Font("Nirmala UI", 0, 11)); // NOI18N
         valorDescuentos.setText("$0");
-        jPanel1.add(valorDescuentos, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 460, 90, -1));
+        jPanel1.add(valorDescuentos, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 340, 90, -1));
 
         botonLimpiar.setFont(new java.awt.Font("Nirmala UI", 0, 11)); // NOI18N
         botonLimpiar.setText("Limpiar");
@@ -235,7 +263,7 @@ public class VistaFormulario extends javax.swing.JFrame {
                 botonLimpiarActionPerformed(evt);
             }
         });
-        jPanel1.add(botonLimpiar, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 400, 90, -1));
+        jPanel1.add(botonLimpiar, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 300, 80, -1));
 
         botonConfirmarReserva.setFont(new java.awt.Font("Nirmala UI", 0, 11)); // NOI18N
         botonConfirmarReserva.setText("Confirmar Reserva");
@@ -244,41 +272,60 @@ public class VistaFormulario extends javax.swing.JFrame {
                 botonConfirmarReservaActionPerformed(evt);
             }
         });
-        jPanel1.add(botonConfirmarReserva, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 550, 170, 30));
+        jPanel1.add(botonConfirmarReserva, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 590, 260, 30));
 
         botonConsultar.setFont(new java.awt.Font("Nirmala UI", 0, 11)); // NOI18N
-        botonConsultar.setText("Consultar Disponibilidad");
+        botonConsultar.setText("Consultar");
         botonConsultar.setToolTipText("");
         botonConsultar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 botonConsultarActionPerformed(evt);
             }
         });
-        jPanel1.add(botonConsultar, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 400, 170, -1));
+        jPanel1.add(botonConsultar, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 270, 80, -1));
 
         comboTipoId.setFont(new java.awt.Font("Nirmala UI", 0, 11)); // NOI18N
         comboTipoId.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Cedula de ciudadania", "Pasaporte", "Cedula de extranjeria" }));
-        jPanel1.add(comboTipoId, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 490, 130, -1));
+        jPanel1.add(comboTipoId, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 430, 130, -1));
 
         jLabel9.setFont(new java.awt.Font("Nirmala UI", 0, 11)); // NOI18N
         jLabel9.setText("Tipo de Documento");
-        jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 495, 110, -1));
+        jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 431, 110, -1));
 
         jLabel13.setFont(new java.awt.Font("Nirmala UI", 0, 11)); // NOI18N
-        jLabel13.setText("Número de identificacion");
-        jPanel1.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 525, 190, -1));
+        jLabel13.setText("Fecha de Nacimiento");
+        jPanel1.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 551, 110, -1));
 
-        numId.setFont(new java.awt.Font("Nirmala UI", 0, 11)); // NOI18N
-        jPanel1.add(numId, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 520, 130, -1));
+        campoNumId.setFont(new java.awt.Font("Nirmala UI", 0, 11)); // NOI18N
+        jPanel1.add(campoNumId, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 460, 130, -1));
+        jPanel1.add(campoNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 400, 130, -1));
+        jPanel1.add(campoTelefono, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 520, 130, -1));
+        jPanel1.add(campoDireccionCompleta, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 490, 130, -1));
+        jPanel1.add(fechaNacimiento, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 550, 130, -1));
+
+        jLabel17.setFont(new java.awt.Font("Nirmala UI", 0, 11)); // NOI18N
+        jLabel17.setText("Número de Identificacion");
+        jPanel1.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 461, 130, -1));
+
+        jLabel19.setFont(new java.awt.Font("Nirmala UI", 0, 11)); // NOI18N
+        jLabel19.setText("Teléfono");
+        jPanel1.add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 521, 110, -1));
+
+        jLabel18.setFont(new java.awt.Font("Nirmala UI", 0, 11)); // NOI18N
+        jLabel18.setText("Dirección");
+        jPanel1.add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 491, 110, -1));
 
         fondoTranslucido.setOpaque(true);
-        jPanel1.add(fondoTranslucido, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 30, 320, 560));
+        jPanel1.add(fondoTranslucido, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 30, 320, 600));
 
         fondoFormulario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/Fondo_Formulario.png"))); // NOI18N
+        fondoFormulario.setMaximumSize(new java.awt.Dimension(380, 650));
+        fondoFormulario.setMinimumSize(new java.awt.Dimension(380, 650));
         fondoFormulario.setName(""); // NOI18N
+        fondoFormulario.setPreferredSize(new java.awt.Dimension(380, 650));
         jPanel1.add(fondoFormulario, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 380, -1));
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -335,12 +382,17 @@ public class VistaFormulario extends javax.swing.JFrame {
     private javax.swing.JButton botonConfirmarReserva;
     private javax.swing.JButton botonConsultar;
     private javax.swing.JButton botonLimpiar;
+    private javax.swing.JTextField campoDireccionCompleta;
+    private javax.swing.JTextField campoNombre;
+    private javax.swing.JTextField campoNumId;
+    private javax.swing.JTextField campoTelefono;
     private javax.swing.JComboBox<String> comboHabitaciones;
     private javax.swing.JComboBox<String> comboPersonas;
-    private javax.swing.JComboBox<String> comboTipo;
+    private javax.swing.JComboBox<String> comboTipoHab;
     private javax.swing.JComboBox<String> comboTipoId;
     private org.jdatepicker.JDatePicker fechaFinal;
     private org.jdatepicker.JDatePicker fechaInicial;
+    private org.jdatepicker.JDatePicker fechaNacimiento;
     private javax.swing.JLabel fondoFormulario;
     private javax.swing.JLabel fondoTranslucido;
     private javax.swing.JLabel jLabel1;
@@ -350,6 +402,10 @@ public class VistaFormulario extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel16;
+    private javax.swing.JLabel jLabel17;
+    private javax.swing.JLabel jLabel18;
+    private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -361,7 +417,6 @@ public class VistaFormulario extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel numHabDoblesReservadas;
     private javax.swing.JLabel numHabSencillasReservadas;
-    private javax.swing.JTextField numId;
     private javax.swing.JLabel numPersonasReservadas;
     private javax.swing.JLabel valorAproximado;
     private javax.swing.JLabel valorDescuentos;
