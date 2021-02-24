@@ -57,6 +57,7 @@ public class VistaReservas extends javax.swing.JPanel {
         jLabel5 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
+        botonReservar1 = new javax.swing.JButton();
         botonReservar = new javax.swing.JButton();
         botonConsultar = new javax.swing.JButton();
         numPersonas = new javax.swing.JComboBox<>();
@@ -112,6 +113,23 @@ public class VistaReservas extends javax.swing.JPanel {
         add(jLabel3);
         jLabel3.setBounds(50, 160, 40, 20);
 
+        botonReservar1.setBackground(new java.awt.Color(255, 255, 255));
+        botonReservar1.setFont(new java.awt.Font("Tempus Sans ITC", 0, 24)); // NOI18N
+        botonReservar1.setForeground(new java.awt.Color(51, 51, 51));
+        botonReservar1.setText("CANCELAR RESERVA");
+        botonReservar1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
+        botonReservar1.setBorderPainted(false);
+        botonReservar1.setContentAreaFilled(false);
+        botonReservar1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        botonReservar1.setFocusPainted(false);
+        botonReservar1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonReservar1ActionPerformed(evt);
+            }
+        });
+        add(botonReservar1);
+        botonReservar1.setBounds(760, 390, 250, 50);
+
         botonReservar.setBackground(new java.awt.Color(255, 255, 255));
         botonReservar.setFont(new java.awt.Font("Tempus Sans ITC", 0, 24)); // NOI18N
         botonReservar.setForeground(new java.awt.Color(255, 255, 255));
@@ -163,10 +181,15 @@ public class VistaReservas extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_botonReservarActionPerformed
 
+    private void botonReservar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonReservar1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_botonReservar1ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton botonConsultar;
     private javax.swing.JButton botonReservar;
+    private javax.swing.JButton botonReservar1;
     private org.jdatepicker.JDatePicker fechaFinRes;
     private org.jdatepicker.JDatePicker fechaInicioRes;
     private javax.swing.JLabel fondoReserva;
