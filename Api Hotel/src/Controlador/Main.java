@@ -8,7 +8,7 @@ public class Main {
         Ventana ventana = new Ventana();
         Control programa = new Control(ventana);
         Conexion con = new Conexion();
-        con.conectarBD("host", "port", "nombre bd", "postgres", "contraseña");
+        con.conectarBD("localhost", "5432", "postgres", "postgres", "perseo");
     }
 
 }
