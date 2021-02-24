@@ -8,6 +8,7 @@ public class Conexion {
 
     Connection connection;
 
+    //CONEXION 
     public void conectarBD(String host, String port, String database,
             String user, String password) {
         String url = "";
@@ -18,7 +19,7 @@ public class Conexion {
             } catch (ClassNotFoundException ex) {
                 System.out.println("Error al registrar el driver de PostgreSQL: " + ex);
             }
-            Connection connection = null;
+            connection = null;
             url = "jdbc:postgresql://" + host + ":" + port + "/" + database;
             // Coneccion
             connection = DriverManager.getConnection(
@@ -32,28 +33,6 @@ public class Conexion {
     }
 
     //METODO CONSULTAR RESERVA DISPONIBLE SIMP
-    public boolean ConsultarSesion(String f_inicio, String f_final) {
-
-        boolean existe = false;
-        ResultSet rs = null;
-        Statement s = null;
-        //La fecha esta dentro de una reserva hecha
-        try {
-            s = connection.createStatement();
-            rs = s.executeQuery("SELECT f_inicio,f_final FROM reserva WHERE f_inicio BETWEEN '" + f_inicio
-                    + "' AND '" + f_final + "' and f_final BETWEEN '" + f_inicio
-                    + "' AND '" + f_final + "';");
-            if (rs.next()) {
-                existe = true;
-            }
-
-        } catch (Exception e) {
-
-            System.out.println("Problema en consultaSesion");
-        }
-        return existe;
-    }
-
     //METODO CONSULTAR RESERVA DISPONIBLE COMP
     //METODO CONFIRMAR RESERVA
     public void InsertarReserva(int idReserva, int estado, Date f_inicio, Date f_final, int numDias,
@@ -151,15 +130,7 @@ public class Conexion {
         try {
             s = connection.createStatement();
             //Modificar para que muestre los registros que NO ESTEN EN reserva_habitacion
-            rs = s.executeQuery("SELECT h.k_id_habitacion, ht.k_id_tipo_habitacion, h.q_num_camas, th.v_precio\n"
-                    + "            , th.v_descuento FROM habitacion h, habitacion_tipo ht\n"
-                    + "            , tipo_habitacion th\n"
-                    + "            LEFT JOIN reserva_habitacion rh ON h\n"
-                    + "            .k_id_habitacion = rh.k_id_habitacion\n"
-                    + "            WHERE h\n"
-                    + "            .k_id_habitacion = ht.k_id_habitacion AND ht\n"
-                    + "            .k_id_tipo_habitacion = th.k_id_tipo_habitacion AND rh\n"
-                    + "            .k_id_habitacion IS NULL;");
+            rs = s.executeQuery("SELECT h.k_id_habitacion, ht.k_id_tipo_habitacion, h.q_num_camas, th.v_precio, th.v_descuento FROM habitacion h, habitacion_tipo ht, tipo_habitacion th WHERE h.k_id_habitacion=ht.k_id_habitacion AND ht.k_id_tipo_habitacion=th.k_id_tipo_habitacion;");
 
             while (rs.next()) {
                 datos[0] = rs.getString(1);
